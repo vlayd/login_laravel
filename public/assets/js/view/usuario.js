@@ -5,19 +5,56 @@ var currentBaseUrl = baseUrl + 'usuario/';
 
 // ========INICIALIZAÇÃO=============
 $(document).ready(function() {
+    // listar();
 });
 
-$('.botao').on("click", function(e){
-    const idInput = e.currentTarget.id;
-    console.log(idInput);
-    if(idInput.includes('ver')) ver(idInput);
-    else if(idInput.includes('edit')) editar(idInput);
-    else if(idInput.includes('delete')) deletar(idInput);
-    else if(idInput.includes('block')) bloquear(idInput);
+$.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
 });
 
-function ver(idInput){
-    id = idInput.replace('ver', '');
+
+$('body').on("click", '.btn_show_usuario', function(){ ver($(this).data('id')); });
+$('body').on("click", '.btn_save_usuario', function(){ prepereSalvar($(this).data('id')); });
+$('body').on("click", '.btn_delete_usuario', function(){ prepereDeletar($(this).data('id')); });
+$('body').on("click", '.btn_block_usuario', function(){ bloquear($(this).data('id'), $(this).data('ativo')); });
+
+function ver(id){
     $('#nome_ver_modal').html($('#nome'+id).html());
-    $('#nome_ver_modal').html($('#nome'+id).html());
+    $('#email_ver_modal').html($('#email'+id).html());
+    $('#telefone_ver_modal').html($('#telefone'+id).html());
+    $('#endereco_ver_modal').html($('#endereco'+id).html());
+    $('#foto_ver_modal').attr('src', $('#foto'+id).attr('src'));
+}
+
+function prepereSalvar(id){
+    if(id == '0') return resetInput();
+    $('[name="nome"]').val($('#nome'+id).html());
+    $('[name="email"]').val($('#email'+id).html());
+    $('[name="telefone"]').val($('#telefone'+id).html());
+    $('[name="endereco"]').val($('#endereco'+id).html());
+}
+
+function prepereDeletar(id){
+    $('#deletar_nome').html($('#nome'+id).html());
+}
+
+function bloquear(id, ativo){
+    $.ajax({
+        url: url+'/block',
+        method: 'POST',
+        data: {id: id, ativo: ativo},
+        success: function (result) {
+            console.log(result);
+            if(result == 'success') $('#data-list-1').load(url + ' tbody');
+        }
+    });
+}
+
+function resetInput(){
+    $('[name="nome"]').val('');
+    $('[name="email"]').val('');
+    $('[name="telefone"]').val('');
+    $('[name="endereco"]').val('');
 }

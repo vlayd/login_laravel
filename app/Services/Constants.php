@@ -18,6 +18,7 @@ define('SELECT_USUARIOS_NIVEIS', [
                                     'usuarios.id AS id',
                                     'usuarios.nome AS nome',
                                     'usuarios.endereco',
+                                    'usuarios.ativo',
                                     'email', 'telefone', 'foto',
                                     'niveis.nome AS nivel',
                                 ]);
@@ -62,7 +63,7 @@ define('CDN_JS_NUCLEO_FONTAWESOME',
     <script src="'.CDN.'fontawesome/fontawesome/js/all.min.js" rel="stylesheet"></script>
     '
 );
-define('CDN_JS_MAIN', '<script src="'.CDN_JS.'argon-dashboard.min.js?v=2.0.5"></script>');
+define('CDN_JS_MAIN', '<script src="'.CDN_JS.'argon-dashboard.js?v=2.0.5"></script>');
 define('CDN_JS_DATATABLES',
     '
     <script src="'.CDN_JS_PLUGIN.'datatables.js"></script>

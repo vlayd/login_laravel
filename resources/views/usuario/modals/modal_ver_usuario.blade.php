@@ -10,19 +10,20 @@
              <div class="modal-body">
                 <div class="row">
                     <div class="col-12 mb-2 text-center">
-                        <img class="avatar avatar-xxl rounded-circle me-2" src="<?=PATH_SEM_FOTO?>" alt="">
+                        <img class="avatar avatar-xxl rounded-circle me-2" src="<?=PATH_SEM_FOTO?>" id="foto_ver_modal">
                     </div>
-                    <div class="col-12 mb-2 text-center">
+                    <div class="col-12 mb-4 text-center">
                         <h4 class="font-weight-bold" id="nome_ver_modal"></h4>
+                        <div class="text-danger font-weight-bold text-sm mt-n2">Usuário</div>
+                    </div>
+                    <div class="col mb-2">
+                        <span class="text-xs">E-mail: </span><span class="font-weight-bold text-sm"  id="email_ver_modal"></span>
+                    </div>
+                    <div class="col mb-2">
+                        <span class="text-xs">Telefone: </span><span class="font-weight-bold text-sm" id="telefone_ver_modal"></span>
                     </div>
                     <div class="col-12 mb-2">
-                        <span class="text-xs">E-mail: </span><span class="font-weight-bold text-sm"  id="email_ver_modal">vlaydisson@gmail.com</span>
-                    </div>
-                    <div class="col-12 mb-2">
-                        <span class="text-xs">Telefone: </span><span class="font-weight-bold text-sm">9 9904-8994</span>
-                    </div>
-                    <div class="col-12 mb-2">
-                        <span class="text-xs">Endereço: </span><span class="font-weight-bold text-sm">Rua Pêssego, nº 96, Residencial Yumi - Morada do Sol</span>
+                        <span class="text-xs">Endereço: </span><span class="font-weight-bold text-sm" id="endereco_ver_modal"></span>
                     </div>
                 </div>
              </div>

@@ -8,7 +8,7 @@
                  </span>
              </div>
              <div class="modal-body">
-                <p>Deseja mesmo deletar o usuário <span class="font-weight-bold">Vlaydisson</span></p>
+                <p>Deseja mesmo deletar <span class="font-weight-bold" id="deletar_nome"></span></p>
              </div>
              <div class="modal-footer">
                  <button type="button" class="btn bg-gradient-danger">Excluir</button>

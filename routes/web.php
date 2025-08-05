@@ -19,5 +19,7 @@ Route::middleware([CheckIsLogged::class])->group(function(){
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::prefix('usuario')->group(function(){
         Route::get('/', [UsuarioController::class, 'index'])->name('usuario');
+        Route::get('/listar', [UsuarioController::class, 'listar'])->name('usuario.listar');
+        Route::post('/block', [UsuarioController::class, 'bloquear'])->name('usuario.bloquear');
     });
 });

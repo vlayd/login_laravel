@@ -24,4 +24,27 @@ class UsuarioController extends Controller
         ];
         return view('usuario.index', $dados);
     }
+
+    public function listar()
+    {
+         return view('usuario.tabela', ['usuarios' => $this->getUsuarioTabela()]);
+    }
+
+    public function bloquear(Request $request)
+    {
+        if(DB::table('usuarios')->where('id', $request['id'])->update(['ativo' => $request['ativo']])){
+            return 'success';
+        } else {
+            return 'erro';
+        }
+    }
+
+    private function getUsuarioTabela()
+    {
+        return DB::table('usuarios')
+                        ->select(SELECT_USUARIOS_NIVEIS)
+                        ->join('niveis', 'usuarios.nivel', '=', 'niveis.id')
+                        ->whereNot('usuarios.id', session('user.id'))
+                        ->get();
+    }
 }
