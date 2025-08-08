@@ -58,3 +58,4 @@
         </tbody>
     </table>
 </div>
+<?=CDN_JS_DATATABLES?>

@@ -5,7 +5,7 @@ var currentBaseUrl = baseUrl + 'usuario/';
 
 // ========INICIALIZAÇÃO=============
 $(document).ready(function() {
-    // listar();
+    listar();
 });
 
 $.ajaxSetup({
@@ -40,14 +40,23 @@ function prepereDeletar(id){
     $('#deletar_nome').html($('#nome'+id).html());
 }
 
+function listar(){
+    $.ajax({
+        url: url+'/listar',
+        method: 'GET',
+        success: function (result) {
+            $('#tabela').html(result);
+        }
+    });
+}
+
 function bloquear(id, ativo){
     $.ajax({
         url: url+'/block',
         method: 'POST',
         data: {id: id, ativo: ativo},
         success: function (result) {
-            console.log(result);
-            if(result == 'success') $('#data-list-1').load(url + ' tbody');
+            if(result == 'success') listar();
         }
     });
 }

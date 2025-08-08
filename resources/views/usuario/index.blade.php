@@ -39,5 +39,4 @@ $page = 'usuario';
 @endsection
 
 @section('js')
-<?=CDN_JS_DATATABLES?>
 @endsection
