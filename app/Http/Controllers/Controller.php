@@ -7,7 +7,7 @@ abstract class Controller
 {
 
     public function __construct() {
-        define('USER', DB::table('usuarios')->select(['nome', 'foto'])->where('id', session('user.id'))->first());
+        define('USER', DB::table('usuarios')->where('id', session('user.id'))->first());
     }
 
     protected function breadcrumb(array $list)

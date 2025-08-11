@@ -37,6 +37,7 @@ define('CDN_CSS_NUCLEO_FONTAWESOME',
     <link href="'.CDN.'fontawesome/fontawesome/css/all.min.css" rel="stylesheet" />
     '
 );
+define('CDN_CSS_TOAST', '<link href="'.CDN_CSS.'jquery.toast.min.css" rel="stylesheet" />');
 define('CDN_CSS_MAIN', '<link href="'.CDN_CSS.'argon-dashboard.css?v=2.0.5" rel="stylesheet" />');
 
 
@@ -59,12 +60,20 @@ define('CDN_JS_SCROLLBAR',
 );
 define('CDN_JS_NUCLEO_FONTAWESOME',
     '
-    <script src="'.CDN.'fontawesome/js/all.min.js" rel="stylesheet"></script>
-    <script src="'.CDN.'fontawesome/fontawesome/js/all.min.js" rel="stylesheet"></script>
+    <script src="'.CDN.'fontawesome/js/all.min.js"></script>
+    <script src="'.CDN.'fontawesome/fontawesome/js/all.min.js"></script>
     '
 );
 define('CDN_JS_MAIN', '<script src="'.CDN_JS.'argon-dashboard.js?v=2.0.5"></script>');
 define('CDN_JS_DATATABLES',
+    '
+    <script src="'.CDN_JS_PLUGIN.'datatables.js"></script>
+    <script src="'.CDN_JS_INIT.'datatables.js"></script>
+    '
+);
+define('CDN_JS_TOAST', '<script src="'.CDN_JS_PLUGIN.'jquery.toast.min.js">');
+
+define('CDN_JS_NOTIFIQUE',
     '
     <script src="'.CDN_JS_PLUGIN.'datatables.js"></script>
     <script src="'.CDN_JS_INIT.'datatables.js"></script>

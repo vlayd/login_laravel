@@ -18,6 +18,7 @@
   @yield('css')
   <!-- Font Awesome Icons -->
   <?=CDN_CSS_NUCLEO_FONTAWESOME?>
+  <?=CDN_CSS_TOAST?>
   <!-- CSS Files -->
   <?=CDN_CSS_MAIN?>
 
@@ -70,11 +71,12 @@
                 </div>
               </a>
             </li>
-            <li class="nav-item px-3 d-flex align-items-center">
-                <a href="javascript:;" class="nav-link text-white p-0" data-bs-toggle="dropdown" id="navbarDropdownMenu" aria-expanded="false">
+            <li class="nav-item px-3 d-flex align-items-center dropdown">
+                <a href="javascript:;" role="button" class="nav-link text-white p-0" data-bs-toggle="dropdown" id="navbarDropdownMenu" aria-expanded="false">
                     <i class="fa fa-cog cursor-pointer"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a data-bs-toggle="modal" data-bs-target="#configuracaoUsuarioModal" class="dropdown-item" href="javascript:;">Configurações</a></li>
                     <li><a class="dropdown-item" href="{{route('logout')}}">Sair</a></li>
                 </ul>
             </li>
@@ -88,15 +90,18 @@
         @yield('content')
     </div>
   </main>
+  @include('usuario.modals.modal_configuracao_usuario')
 
   <?=CDN_JS_CORE?>
   <?=CDN_JS_SCROLLBAR?>
   @yield('js')
   <?=CDN_JS_NUCLEO_FONTAWESOME?>
+  <?=CDN_JS_TOAST?>
   <?=CDN_JS_MAIN?>
   @php
       $scriptPage = $page??'home';
   @endphp
+  <script src="{{asset('assets/js/view/pages.js')}}" type="text/javascript"></script>
   <script src="{{asset('assets/js/view/'.$scriptPage.'.js')}}" type="text/javascript"></script>
   @yield('js2')
 </body>

@@ -41,10 +41,10 @@
                     <a data-bs-toggle="modal" data-bs-target="#verUsuarioModal" class="me-1 btn btn-primary py-1 px-2 btn_show_usuario" data-id="{{$usuario->id}}" title="Ver usuário">
                         <i class="fas fa-eye text-white fa-sm"></i>
                     </a>
-                    <a data-bs-toggle="modal" data-bs-target="#saveUsuarioModal" class="me-1 btn btn-warning py-1 px-2 btn_save_usuario" data-id="{{$usuario->id}}" title="Salvar usuário">
+                    <a data-bs-toggle="modal" data-bs-target="#saveUsuarioModal" class="me-1 btn btn-warning py-1 px-2 btn_prepare_save_usuario" data-id="{{$usuario->id}}" title="Salvar usuário">
                         <i class="fas fa-pen text-white fa-fw fa-sm"></i>
                     </a>
-                    <a data-bs-toggle="modal" data-bs-target="#deletarUsuarioModal" class="me-1 btn btn-danger py-1 px-2 btn_delete_usuario" data-id="{{$usuario->id}}" title="Deletar usuário">
+                    <a data-bs-toggle="modal" data-bs-target="#deletarUsuarioModal" class="me-1 btn btn-danger py-1 px-2 btn_prepare_delete_usuario" data-id="{{$usuario->id}}" title="Deletar usuário">
                         <i class="fas fa-trash text-white fa-fw fa-sm"></i>
                     </a>
                     <a class="me-1 btn btn-{{$corAtivo}} py-1 px-2 btn_block_usuario" title="Bloquear usuário" data-id="{{$usuario->id}}" data-ativo="{{$ativo}}">

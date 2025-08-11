@@ -21,5 +21,7 @@ Route::middleware([CheckIsLogged::class])->group(function(){
         Route::get('/', [UsuarioController::class, 'index'])->name('usuario');
         Route::get('/listar', [UsuarioController::class, 'listar'])->name('usuario.listar');
         Route::post('/block', [UsuarioController::class, 'bloquear'])->name('usuario.bloquear');
+        Route::post('/salvar', [UsuarioController::class, 'salvar'])->name('usuario.salvar');
+        Route::post('/deletar', [UsuarioController::class, 'deletar'])->name('usuario.deletar');
     });
 });

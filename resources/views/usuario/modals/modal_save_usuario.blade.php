@@ -7,33 +7,40 @@
                      <i class="fa-solid fa-xmark text-white"></i>
                  </span>
              </div>
-             <div class="modal-body">
-                 <form action="" method="post">
+             <form id="form_save">
+                 <div class="modal-body">
                      <div class="row">
                          <div class="col-12 mb-2">
-                             <label for="email_modal">Nome</label>
-                             <input name="nome" type="text" class="form-control">
+                            <div class="form-group">
+                                <label for="nome_save_modal">Nome</label>
+                                <input name="nome" id="nome_save_modal" type="text" class="form-control">
+                            </div>
+
                          </div>
                          <div class="col-6 mb-2">
-                             <label for="nome_save_modal">E-mail</label>
-                             <input name="email" type="email" class="form-control">
+                            <div class="form-group">
+                                <label for="email_save_modal">E-mail</label>
+                                <input name="email" id="email_save_modal" type="email" class="form-control">
+                                <div class="text-danger text-xs" id="email_erro"></div>
+                            </div>
                          </div>
                          <div class="col-6 mb-2">
-                             <label for="nome_save_modal">Telefone</label>
-                             <input name="telefone" type="text" class="form-control">
+                             <label for="telefone_save_modal">Telefone</label>
+                             <input name="telefone" id="telefone_save_modal" type="text" class="form-control" required>
+                             <div class="text-danger text-xs" id="telefone_erro"></div>
                          </div>
                          <div class="col-12 mb-2">
-                             <label for="nome_save_modal">Endereço</label>
-                             <input name="endereco" type="text" class="form-control">
+                             <label for="endereco_save_modal">Endereço</label>
+                             <input name="endereco" id="endereco_save_modal" type="text" class="form-control">
                          </div>
                      </div>
-
-                 </form>
-             </div>
-             <div class="modal-footer">
-                 <button type="button" class="btn bg-gradient-primary">Salvar</button>
-                 <button type="button" class="btn btn-link ml-auto" data-bs-dismiss="modal">Fechar</button>
-             </div>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="submit" form="form_save" class="btn bg-gradient-primary">Salvar</button>
+                     <input type="hidden" name="id" value="">
+                     <button type="button" class="btn btn-link ml-auto" data-bs-dismiss="modal">Fechar</button>
+                 </div>
+             </form>
          </div>
      </div>
  </div>

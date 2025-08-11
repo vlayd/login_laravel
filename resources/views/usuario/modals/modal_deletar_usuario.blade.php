@@ -11,7 +11,7 @@
                 <p>Deseja mesmo deletar <span class="font-weight-bold" id="deletar_nome"></span></p>
              </div>
              <div class="modal-footer">
-                 <button type="button" class="btn bg-gradient-danger">Excluir</button>
+                 <button type="button" id="btn_delete_usuario" data-id="" class="btn bg-gradient-danger" data-bs-dismiss="modal">Excluir</button>
                  <button type="button" class="btn btn-link ml-auto text-danger" data-bs-dismiss="modal">Fechar</button>
              </div>
          </div>
