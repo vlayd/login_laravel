@@ -21,13 +21,13 @@
                             <div class="form-group">
                                 <label for="email_save_modal">E-mail</label>
                                 <input name="email" id="email_save_modal" type="email" class="form-control">
-                                <div class="text-danger text-xs" id="email_erro"></div>
+                                <div class="text-danger text-xs email_erro"></div>
                             </div>
                          </div>
                          <div class="col-6 mb-2">
                              <label for="telefone_save_modal">Telefone</label>
                              <input name="telefone" id="telefone_save_modal" type="text" class="form-control" required>
-                             <div class="text-danger text-xs" id="telefone_erro"></div>
+                             <div class="text-danger text-xs telefone_erro"></div>
                          </div>
                          <div class="col-12 mb-2">
                              <label for="endereco_save_modal">Endereço</label>

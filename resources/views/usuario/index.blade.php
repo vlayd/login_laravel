@@ -20,7 +20,7 @@ $page = 'usuario';
                     </div>
                     <div class="ms-auto my-auto mt-lg-0 mt-4">
                         <div class="ms-auto my-auto">
-                            <a data-bs-toggle="modal" data-bs-target="#saveUsuarioModal" class="btn bg-gradient-primary btn-sm mb-0 btn_save_usuario" data-id="0">+&nbsp; Novo Usuario</a>
+                            <a data-bs-toggle="modal" data-bs-target="#saveUsuarioModal" class="btn bg-gradient-primary btn-sm mb-0 btn_prepare_save_usuario" data-id="0">+&nbsp; Novo Usuario</a>
                         </div>
                     </div>
                 </div>

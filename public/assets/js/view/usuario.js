@@ -1,12 +1,10 @@
 // ========VARIÁVEIS BASE=============
-var url = window.location.href;
-var baseUrl = $('#base_url').html();
-var currentBaseUrl = baseUrl + 'usuario/';
 var modalUsuario =  new bootstrap.Modal(document.getElementById('saveUsuarioModal'));
 
 // ========INICIALIZAÇÃO=============
 $(document).ready(function () {
     listar();
+
 });
 
 $.ajaxSetup({
@@ -21,34 +19,7 @@ $('body').on("click", '.btn_prepare_save_usuario', function () { prepereSalvar($
 $('body').on("click", '.btn_prepare_delete_usuario', function () { prepereDeletar($(this).data('id')); });
 $('body').on("click", '#btn_delete_usuario', function () { deletar($(this).data('id')); });
 $('body').on("click", '.btn_block_usuario', function () { bloquear($(this).data('id'), $(this).data('ativo')); });
-$('#form_save').on("submit", function (e) {
-    e.preventDefault();
-    $.ajax({
-        url: url + '/salvar',
-        method: 'POST',
-        data: new FormData(this),
-        contentType: false,
-        cache: false,
-        processData: false,
-        success: function (result) {
-            resetErros();
-            if(result == 'success' || result == 'erro'){
-                toast('success', 'Salvo com sucesso!');
-                modalUsuario.hide();
-                listar();
-            } else {
-                var erros = JSON.parse(result);
-                $.each(erros, function(key, value){
-                    $('#'+key+'_erro').html(value);
-                    $('[name="'+key+'"]').addClass('is-invalid');
-                });
-            }
-        },
-        error: function (result) {
-            toast('error', 'Erro ao enviar mensagem!');
-        }
-    });
-});
+$('#form_save').on("submit", function (e) { salvar(e, this); });
 
 function ver(id) {
     $('#nome_ver_modal').html($('#nome' + id).html());
@@ -122,9 +93,4 @@ function resetErros(){
         $('#'+value+'_erro').html('');
         $('[name="'+value+'"]').removeClass('is-invalid');
     });
-}
-
-function modal(id, acao){
-    var modal =  new bootstrap.Modal(document.getElementById(id));
-    if(acao == 'hide') modal.hide;
 }

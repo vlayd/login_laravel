@@ -14,12 +14,12 @@
                  <div class="modal-body">
                      <div class="row">
                          <div class="col-12 text-center">
-                            <label for="foto_save_modal">
-                                <img class="avatar avatar-xxl rounded-circle me-2" src="{{asset($foto)}}" id="foto_ver_modal">
+                            <label for="foto_conf">
+                                <img class="avatar avatar-xxl rounded-circle me-2" src="{{asset($foto)}}" id="foto_conf_modal">
                             </label>
                          </div>
                          <div class="col-12 d-none">
-                            <input type="file" class="form-control" id="foto_save_modal">
+                            <input type="file" name="foto_conf" id="foto_conf" onchange="changePhoto('foto_conf_modal', this)" class="form-control input_foto">
                          </div>
                          <div class="col-12">
                              <div class="form-group">

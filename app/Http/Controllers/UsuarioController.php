@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
@@ -34,12 +35,18 @@ class UsuarioController extends Controller
         }
     }
 
-    public function salvar(Request $request)
+    public function findEmailTelefone(Request $request):array
     {
         $retorno = [];
         if($this->pesquisa('email', $request['email'], $request['id']) > 0) $retorno['email'] = 'O e-mail já cadastrado';
         if($this->pesquisa('telefone', $request['telefone'], $request['id']) > 0) $retorno['telefone'] = 'O telefone já cadastrado';
-        if(count($retorno) > 0) return json_encode($retorno);
+        return $retorno;
+    }
+
+    public function salvar(Request $request)
+    {
+        $erros = $this->findEmailTelefone($request);
+        if(count($erros) > 0) return json_encode($erros);
 
         $senha = md5(mb_substr($request['telefone'], -4));
         $dados = [
@@ -63,6 +70,29 @@ class UsuarioController extends Controller
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }
+    }
+
+
+
+    public function salvarCurrentUser(Request $request)
+    {
+        $erros = $this->findEmailTelefone($request);
+        if(count($erros) > 0) return json_encode($erros);
+
+        $dados = [
+            'nome' => $request['nome'],
+            'email' => $request['email'],
+            'telefone' => $request['telefone'],
+            'endereco' => $request['endereco'],
+        ];
+
+        try {
+            DB::table('usuarios')->where('id', session('user.id'))->update($dados);
+            return 'success';
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+        return 'erro';
     }
 
     public function deletar(Request $request)
