@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Services\Operations;
 use Illuminate\Support\Facades\DB;
+
+use function PHPUnit\Framework\isNull;
 
 abstract class Controller
 {
@@ -33,5 +37,32 @@ abstract class Controller
             $breadcrumb.= '<li class="breadcrumb-item text-white '.$item1.'" '.$item2.'>'.$nome.'</li>';
         }
         return $breadcrumb.'</ol>'.$item3.'</nav>';
+    }
+
+    protected function decriptId($id)
+    {
+        $id = Operations::decriptId($id);
+        if($id == null || $id == '') return redirect()->route('index');
+        else return $id;
+    }
+
+    protected function uploadFile($inputFile, $path, $oldFile = '')
+    {
+        $fileName = time().'.'.$inputFile->extension();
+        $inputFile->move(public_path($path), $fileName);
+        if(!empty($oldFile)) $this->deleteFile($path, $oldFile);
+
+        return $fileName;
+    }
+
+    protected function deleteFile($path, $nome) {
+        try{
+            if(file_exists($path.'/'.$nome)){
+                unlink($path.'/'.$nome);
+                return true;
+            }
+        } catch(\Throwable $e){
+            return false;
+        }
     }
 }

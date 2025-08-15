@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
 {
+
     public function index()
     {
         $dados = [
@@ -47,22 +48,25 @@ class UsuarioController extends Controller
     {
         $erros = $this->findEmailTelefone($request);
         if(count($erros) > 0) return json_encode($erros);
-
-        $senha = md5(mb_substr($request['telefone'], -4));
         $dados = [
             'nome' => $request['nome'],
             'email' => $request['email'],
             'telefone' => $request['telefone'],
             'endereco' => $request['endereco'],
-            'senha' => $senha,
-            'config' => session('user.config'),
         ];
 
         try {
             if($request['id'] != ''){
-            DB::table('usuarios')->where('id', $request['id'])->update($dados);
-            return 'success';
+                if($request->hasFile('foto')){
+                    $old = isset($request['old'])?$request['old']:'';
+                    $dados['foto'] = $this->uploadFile($request->file('foto'), PATH_PERFIL.$request['id'], $old);
+                }
+                DB::table('usuarios')->where('id', $request['id'])->update($dados);
+                return 'success';
             } else {
+                $senha = md5(mb_substr($request['telefone'], -4));
+                $dados['senha'] = $senha;
+                $dados['config'] = session('user.config');
                 DB::table('usuarios')->insert($dados);
                 return 'success';
             }
@@ -70,29 +74,6 @@ class UsuarioController extends Controller
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }
-    }
-
-
-
-    public function salvarCurrentUser(Request $request)
-    {
-        $erros = $this->findEmailTelefone($request);
-        if(count($erros) > 0) return json_encode($erros);
-
-        $dados = [
-            'nome' => $request['nome'],
-            'email' => $request['email'],
-            'telefone' => $request['telefone'],
-            'endereco' => $request['endereco'],
-        ];
-
-        try {
-            DB::table('usuarios')->where('id', session('user.id'))->update($dados);
-            return 'success';
-        } catch (\Throwable $th) {
-            return $th->getMessage();
-        }
-        return 'erro';
     }
 
     public function deletar(Request $request)

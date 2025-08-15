@@ -34,17 +34,18 @@ class AuthController extends Controller
         $user = DB::table('usuarios')->where('email', $email)->first();
         if(!$user) return $this->loginError('Usuário não cadastrado!');
         if($user->ativo == '0')return $this->loginError('Usuário não autorizado!');
-        $user = DB::table('usuarios')->where(['email'=> $email, 'senha'=> md5($senha)])->first();
+        $user = DB::table('usuarios')->select(SELECT_USUARIOS_NIVEIS)->where(['email'=> $email, 'senha'=> md5($senha)])
+                        ->join('niveis', 'usuarios.nivel', '=', 'niveis.id')->first();
         if(!$user)return $this->loginError('Dados incorretos!');
+        // dd($user);
 
         //login user
         session([
             'user' => [
                 'id' => $user->id,
-                'nome' => $user->nome,
                 'config' => $user->config,
-                'foto' => $user->foto,
-                'nivel' => $user->nivel,
+                'nivel' => $user->idNivel,
+                'nome_nivel' => $user->nivel,
             ]
         ]);
 

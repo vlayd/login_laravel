@@ -19,8 +19,10 @@ define('SELECT_USUARIOS_NIVEIS', [
                                     'usuarios.nome AS nome',
                                     'usuarios.endereco',
                                     'usuarios.ativo',
+                                    'usuarios.config',
                                     'email', 'telefone', 'foto',
                                     'niveis.nome AS nivel',
+                                    'niveis.id AS idNivel',
                                 ]);
 
 

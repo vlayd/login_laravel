@@ -38,6 +38,35 @@ function prepereSalvar(id) {
     $('[name="id"]').val(id);
 }
 
+function salvar(event, formdata){
+    event.preventDefault();
+    $.ajax({
+        url: urlUsuario + 'salvar',
+        method: 'POST',
+        data: new FormData(formdata),
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (result) {
+            resetErros();
+            if(result == 'success' || result == 'erro'){
+                toast('success', 'Salvo com sucesso!');
+                modalUsuario.hide();
+                listar();
+            } else {
+                var erros = JSON.parse(result);
+                $.each(erros, function(key, value){
+                    $('.'+key+'_erro').html(value);
+                    $('[name="'+key+'"]').addClass('is-invalid');
+                });
+            }
+        },
+        error: function (result) {
+            toast('error', 'Erro ao enviar mensagem!');
+        }
+    });
+}
+
 function prepereDeletar(id) {
     $('#deletar_nome').html($('#nome' + id).html());
     $('#btn_delete_usuario').attr('data-id', id);
@@ -45,7 +74,7 @@ function prepereDeletar(id) {
 
 function deletar(id) {
     $.ajax({
-        url: url + '/deletar',
+        url: urlUsuario + 'deletar',
         method: 'POST',
         data: {id: id},
         success: function (result) {
@@ -60,7 +89,7 @@ function deletar(id) {
 
 function listar() {
     $.ajax({
-        url: url + '/listar',
+        url: urlUsuario + 'listar',
         method: 'GET',
         success: function (result) {
             $('#tabela').html(result);
@@ -70,7 +99,7 @@ function listar() {
 
 function bloquear(id, ativo) {
     $.ajax({
-        url: url + '/block',
+        url: urlUsuario + 'block',
         method: 'POST',
         data: { id: id, ativo: ativo },
         success: function (result) {

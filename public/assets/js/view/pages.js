@@ -7,12 +7,18 @@ $(document).ready(function () {
 
 });
 
-$('#form_current_save').on("submit", function (e) { salvarCurrent(e, this); });
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 
-function salvar(event, formdata){
+$('#form_current_save').on("submit", function (e) { salvarPerfil(e, this); });
+
+function salvarPerfil(event, formdata){
     event.preventDefault();
     $.ajax({
-        url: urlUsuario + '/salvar',
+        url: urlUsuario + 'salvar',
         method: 'POST',
         data: new FormData(formdata),
         contentType: false,
@@ -21,9 +27,11 @@ function salvar(event, formdata){
         success: function (result) {
             resetErros();
             if(result == 'success' || result == 'erro'){
-                toast('success', 'Salvo com sucesso!');
-                modalUsuario.hide();
-                listar();
+                toast(result, 'Salvo com sucesso!');
+                setTimeout(() => window.location.reload(), 2000);
+                // location.reload();
+            } else if(result == 'erro'){
+                toast(result, 'Erro ao salvar!');
             } else {
                 var erros = JSON.parse(result);
                 $.each(erros, function(key, value){
@@ -33,6 +41,8 @@ function salvar(event, formdata){
             }
         },
         error: function (result) {
+            console.log(result);
+
             toast('error', 'Erro ao enviar mensagem!');
         }
     });
@@ -61,4 +71,11 @@ function changePhoto(idFoto, file) {
     } else {
         document.getElementById(idFoto).src = window.URL.createObjectURL(file.files[0]);
     }
+}
+
+function resetErros(){
+    $.each(['email', 'telefone'], function(key, value){
+        $('#'+value+'_erro').html('');
+        $('[name="'+value+'"]').removeClass('is-invalid');
+    });
 }

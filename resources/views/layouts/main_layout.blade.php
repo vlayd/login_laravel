@@ -57,9 +57,15 @@
             <li class="nav-item d-flex align-items-center">
               <div class="nav-link text-white font-weight-bold px-0 text-center">
                 <!-- <i class="fa fa-user me-sm-1"></i> -->
-                <img src="{{asset($foto)}}" class="avatar avatar-sm rounded-circle me-2">
-                <span class="d-sm-inline d-none">{{USER->nome}}</span>
-                <div class="text-center mt-n2 opacity-3 fw-bold">Administrador</div>
+                <div class="row">
+                    <div class="col-auto p-0">
+                        <img src="{{asset($foto)}}" class="avatar avatar-sm rounded-circle">
+                    </div>
+                    <div class="col-auto">
+                        <div class="d-sm-inline d-none">{{USER->nome}}</div>
+                        <div class="text-center mt-n1 opacity-3 fw-bold d-sm-block d-none">{{session('user.nome_nivel')}}</div>
+                    </div>
+                </div>
               </div>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">

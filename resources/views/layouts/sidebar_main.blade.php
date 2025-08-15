@@ -44,6 +44,34 @@
                     </ul>
                 </div>
             </li>
+            <li class="nav-item">
+                <hr class="horizontal dark" />
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Gerenciar</h6>
+            </li>
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" aria-controls="cadastroColapse" role="button" aria-expanded="false" href="#cadastroColapse" class="nav-link {{$activeUsuarios??''}}">
+                    <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                        <i class="fa fa-cog text-info text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Cadastro</span>
+                </a>
+                <div class="collapse {{$showCadastro??''}}" id="cadastroColapse">
+                    <ul class="nav ms-4">
+                        <li class="nav-item ">
+                            <a class="nav-link {{$activeListaGrupos??''}}" href="{{route('usuario')}}">
+                                <span class="sidenav-mini-icon"> Gru </span>
+                                <span class="sidenav-normal"> Grupos </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link {{$activeListaAcessos??''}}" href="{{route('usuario')}}">
+                                <span class="sidenav-mini-icon"> Ace </span>
+                                <span class="sidenav-normal"> Acessos </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
         </ul>
     </div>
     <div class="sidenav-footer mx-3 my-3">
