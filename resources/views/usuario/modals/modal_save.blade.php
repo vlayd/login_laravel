@@ -1,8 +1,8 @@
- <div class="modal fade" id="saveUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="saveUsuarioModalTitulo" aria-hidden="true">
+ <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalTitulo" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
              <div class="modal-header bg-gradient-primary">
-                 <h5 class="modal-title text-white" id="saveUsuarioModalTitulo">Salvar Usuário</h5>
+                 <h5 class="modal-title text-white" id="saveModalTitulo">Salvar Usuário</h5>
                  <span role="button" data-bs-dismiss="modal" aria-label="Close">
                      <i class="fa-solid fa-xmark text-white"></i>
                  </span>

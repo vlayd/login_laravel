@@ -1,8 +1,8 @@
- <div class="modal fade" id="verUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="deletarUsuarioModalTitulo" aria-hidden="true">
+ <div class="modal fade" id="verModal" tabindex="-1" role="dialog" aria-labelledby="verModalTitulo" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
              <div class="modal-header bg-primary">
-                 <h5 class="modal-title text-white" id="deletarUsuarioModalTitulo">Detalhes do Usuário</h5>
+                 <h5 class="modal-title text-white" id="verModalTitulo">Detalhes do Usuário</h5>
                  <span role="button" data-bs-dismiss="modal" aria-label="Close">
                      <i class="fa-solid fa-xmark text-white"></i>
                  </span>

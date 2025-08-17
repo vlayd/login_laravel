@@ -49,7 +49,7 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Gerenciar</h6>
             </li>
             <li class="nav-item">
-                <a data-bs-toggle="collapse" aria-controls="cadastroColapse" role="button" aria-expanded="false" href="#cadastroColapse" class="nav-link {{$activeUsuarios??''}}">
+                <a data-bs-toggle="collapse" aria-controls="cadastroColapse" role="button" aria-expanded="false" href="#cadastroColapse" class="nav-link {{$activeCadastros??''}}">
                     <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                         <i class="fa fa-cog text-info text-sm opacity-10"></i>
                     </div>
@@ -58,7 +58,7 @@
                 <div class="collapse {{$showCadastro??''}}" id="cadastroColapse">
                     <ul class="nav ms-4">
                         <li class="nav-item ">
-                            <a class="nav-link {{$activeListaGrupos??''}}" href="{{route('usuario')}}">
+                            <a class="nav-link {{$activeListaGrupos??''}}" href="{{route('grupo')}}">
                                 <span class="sidenav-mini-icon"> Gru </span>
                                 <span class="sidenav-normal"> Grupos </span>
                             </a>

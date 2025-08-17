@@ -96,7 +96,7 @@
         @yield('content')
     </div>
   </main>
-  @include('usuario.modals.modal_configuracao_usuario')
+  @include('usuario.modals.modal_configuracao')
 
   <?=CDN_JS_CORE?>
   <?=CDN_JS_SCROLLBAR?>

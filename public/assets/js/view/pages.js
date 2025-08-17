@@ -1,6 +1,7 @@
 // ========VARIÁVEIS BASE=============
 var baseUrl = $('#base_url').html();
 var urlUsuario = baseUrl+'usuario/';
+var urlGrupo = baseUrl+'grupo/';
 
 // ========INICIALIZAÇÃO=============
 $(document).ready(function () {

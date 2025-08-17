@@ -23,26 +23,26 @@
                          </div>
                          <div class="col-12">
                              <div class="form-group">
-                                 <label for="nome_save_modal">Nome</label>
-                                 <input name="nome" id="nome_save_modal" type="text" class="form-control" value="{{USER->nome}}">
+                                 <label for="nome_current_modal">Nome</label>
+                                 <input name="nome" id="nome_current_modal" type="text" class="form-control" value="{{USER->nome}}">
                              </div>
 
                          </div>
                          <div class="col-6">
                              <div class="form-group">
-                                 <label for="email_save_modal">E-mail</label>
-                                 <input name="email" id="email_save_modal" type="email" class="form-control" value="{{USER->email}}">
+                                 <label for="email_current_modal">E-mail</label>
+                                 <input name="email" id="email_current_modal" type="email" class="form-control" value="{{USER->email}}">
                                  <div class="text-danger text-xs" id="email_erro"></div>
                              </div>
                          </div>
                          <div class="col-6">
-                             <label for="telefone_save_modal">Telefone</label>
-                             <input name="telefone" id="telefone_save_modal" type="text" class="form-control"  value="{{USER->telefone}}" required>
+                             <label for="telefone_current_modal">Telefone</label>
+                             <input name="telefone" id="telefone_current_modal" type="text" class="form-control"  value="{{USER->telefone}}" required>
                              <div class="text-danger text-xs" id="telefone_erro"></div>
                          </div>
                          <div class="col-12">
-                             <label for="endereco_save_modal">Endereço</label>
-                             <input name="endereco" id="endereco_save_modal" type="text" class="form-control" value="{{USER->endereco}}">
+                             <label for="endereco_current_modal">Endereço</label>
+                             <input name="endereco" id="endereco_current_modal" type="text" class="form-control" value="{{USER->endereco}}">
                          </div>
                      </div>
                  </div>

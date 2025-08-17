@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
@@ -13,18 +12,15 @@ class UsuarioController extends Controller
     {
         $dados = [
             'breadcrumb' => $this->breadcrumb([
-                ['usuarios', route('usuario')], ['Lista']
+                ['Usuários', route('usuario')], ['Lista']
             ]),
-            'titulo' => 'Lista de Usuários',
-            'activeLista' => 'active',
-            'usuarios' => $this->getUsuarioTabela()
         ];
         return view('usuario.index', $dados);
     }
 
     public function listar()
     {
-         return view('usuario.tabela', ['usuarios' => $this->getUsuarioTabela()]);
+         return view('usuario.tabela', ['usuarios' => $this->getTabela()]);
     }
 
     public function bloquear(Request $request)
@@ -39,8 +35,8 @@ class UsuarioController extends Controller
     public function findEmailTelefone(Request $request):array
     {
         $retorno = [];
-        if($this->pesquisa('email', $request['email'], $request['id']) > 0) $retorno['email'] = 'O e-mail já cadastrado';
-        if($this->pesquisa('telefone', $request['telefone'], $request['id']) > 0) $retorno['telefone'] = 'O telefone já cadastrado';
+        if($this->pesquisa('email', $request['email'], $request['id'], 'usuarios') > 0) $retorno['email'] = 'O e-mail já cadastrado';
+        if($this->pesquisa('telefone', $request['telefone'], $request['id'], 'usuarios') > 0) $retorno['telefone'] = 'O telefone já cadastrado';
         return $retorno;
     }
 
@@ -84,20 +80,11 @@ class UsuarioController extends Controller
             return 'success';
             }
         } catch (\Throwable $th) {
-            //throw $th;
+            return 'erro ' . $th->getMessage();
         }
     }
 
-    private function pesquisa($item, $valor, $id)
-    {
-        $where = [
-            [$item, $valor]
-        ];
-        if($id != '') $where[] = ['id', '!=', $id];
-        return DB::table('usuarios')->where($where)->count();
-    }
-
-    private function getUsuarioTabela()
+    private function getTabela()
     {
         return DB::table('usuarios')
                         ->select(SELECT_USUARIOS_NIVEIS)
