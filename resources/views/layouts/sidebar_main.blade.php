@@ -64,7 +64,7 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link {{$activeListaAcessos??''}}" href="{{route('usuario')}}">
+                            <a class="nav-link {{$activeListaAcessos??''}}" href="{{route('acesso')}}">
                                 <span class="sidenav-mini-icon"> Ace </span>
                                 <span class="sidenav-normal"> Acessos </span>
                             </a>

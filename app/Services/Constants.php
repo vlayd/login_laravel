@@ -73,11 +73,10 @@ define('CDN_JS_DATATABLES',
     <script src="'.CDN_JS_INIT.'datatables.js"></script>
     '
 );
-define('CDN_JS_TOAST', '<script src="'.CDN_JS_PLUGIN.'jquery.toast.min.js">');
+define('CDN_JS_TOAST', '<script src="'.CDN_JS_PLUGIN.'jquery.toast.min.js"></script>');
+define('CDN_JS_SWEETALERT2', '<script src="'.CDN_JS_PLUGIN.'sweetalert2.min.js"></script>');
 
 define('CDN_JS_NOTIFIQUE',
-    '
-    <script src="'.CDN_JS_PLUGIN.'datatables.js"></script>
-    <script src="'.CDN_JS_INIT.'datatables.js"></script>
-    '
+    CDN_JS_TOAST.
+    CDN_JS_SWEETALERT2
 );

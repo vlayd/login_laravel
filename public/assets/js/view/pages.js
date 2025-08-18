@@ -2,6 +2,7 @@
 var baseUrl = $('#base_url').html();
 var urlUsuario = baseUrl+'usuario/';
 var urlGrupo = baseUrl+'grupo/';
+var urlAcesso = baseUrl+'acesso/';
 
 // ========INICIALIZAÇÃO=============
 $(document).ready(function () {
@@ -78,5 +79,22 @@ function resetErros(){
     $.each(['email', 'telefone'], function(key, value){
         $('#'+value+'_erro').html('');
         $('[name="'+value+'"]').removeClass('is-invalid');
+    });
+}
+
+function sweetAlert(tipo, mensagem, confirm = false)
+{
+    var tempo = 1500;
+    var titulo = 'Sucesso';
+
+    if(tipo == 'error') titulo = 'Erro';
+    if(confirm) tempo = 10000;
+
+    Swal.fire({
+        title: titulo,
+        text: mensagem,
+        icon: tipo,
+        showConfirmButton: confirm,
+        timer: tempo
     });
 }

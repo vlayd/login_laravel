@@ -15,7 +15,6 @@ $.ajaxSetup({
 
 $('body').on("click", '.btn_prepare_save', function () { prepereSalvar($(this).data('id')); });
 $('body').on("click", '.btn_prepare_delete', function () { prepereDeletar($(this).data('id')); });
-$('body').on("click", '.btn_delete_alert', function () { sweetAlert('error', 'Existem acessos ativos nesse grupo', true); });
 $('body').on("click", '.btn_delete', function () { deletar($(this).data('id')); });
 $('#form_save').on("submit", function (e) { salvar(e, this); });
 
@@ -28,7 +27,7 @@ function prepereSalvar(id) {
 function salvar(event, formdata){
     event.preventDefault();
     $.ajax({
-        url: urlGrupo + 'salvar',
+        url: urlAcesso + 'salvar',
         method: 'POST',
         data: new FormData(formdata),
         contentType: false,
@@ -66,7 +65,7 @@ function prepereDeletar(id) {
 
 function deletar(id) {
     $.ajax({
-        url: urlGrupo + 'deletar',
+        url: urlAcesso + 'deletar',
         method: 'POST',
         data: {id: id},
         success: function (result) {
@@ -81,7 +80,7 @@ function deletar(id) {
 
 function listar() {
     $.ajax({
-        url: urlGrupo + 'listar',
+        url: urlAcesso + 'listar',
         method: 'GET',
         success: function (result) {
             $('#tabela').html(result);

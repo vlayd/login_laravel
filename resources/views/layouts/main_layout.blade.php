@@ -103,6 +103,7 @@
   @yield('js')
   <?=CDN_JS_NUCLEO_FONTAWESOME?>
   <?=CDN_JS_TOAST?>
+  <?=CDN_JS_SWEETALERT2?>
   <?=CDN_JS_MAIN?>
   @php
       $scriptPage = $page??'home';

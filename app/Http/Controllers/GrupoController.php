@@ -13,15 +13,16 @@ class GrupoController extends Controller
             'breadcrumb' => $this->breadcrumb([
                 ['Grupos', route('grupo')], ['Lista']
             ]),
-            'titulo' => 'Lista de Usuários',
-            'activeLista' => 'active',
         ];
         return view('grupo.index', $dados);
     }
 
     public function listar()
     {
-         return view('grupo.tabela', ['grupos' => $this->getTabela()]);
+        return view('grupo.tabela', [
+            'grupos' => $this->getTabela(),
+            'qtdAcessoSemGrupo' => DB::table('acessos')->where('grupo', 0)->count(),
+        ]);
     }
 
     public function salvar(Request $request)
@@ -59,9 +60,17 @@ class GrupoController extends Controller
         }
     }
 
-
-    private function getTabela()
+    private function getTabela($tabela = 'grupo_acessos')
     {
-        return DB::table('grupo_acessos')->get();
+        try {
+            return DB::table('grupo_acessos')
+                    ->select(['grupo_acessos.id', 'grupo_acessos.nome'])
+                    ->selectRaw('COUNT(grupo_acessos.nome) AS qtdAcessos')
+                    ->join('acessos', 'grupo_acessos.id', '=', 'acessos.grupo')
+                    ->groupBy('grupo_acessos.nome', 'grupo_acessos.id')
+                    ->get();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 }
