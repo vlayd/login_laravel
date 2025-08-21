@@ -50,6 +50,16 @@
                     <a class="me-1 btn btn-{{$corAtivo}} py-1 px-2 btn_block" title="Bloquear usuário" data-id="{{$usuario->id}}" data-ativo="{{$ativo}}">
                         <i class="fas fa-user{{$iconeAtivo}} text-white fa-fw fa-sm"></i>
                     </a>
+                    @if ($usuario->idNivel != 2)
+                    <a data-bs-toggle="modal" data-bs-target="#permissaoModal"  class="me-1 btn btn-info py-1 px-2 btn_prepare_permissao" title="Permissões do usuário" data-id="{{$usuario->id}}">
+                        <i class="fas fa-user-lock text-white fa-fw fa-sm"></i>
+                    </a>
+                    @else
+                    <div class="me-1 btn btn-secondary py-1 px-2 btn_block" title="Acesso dos usuário">
+                        <i class="fas fa-user-lock text-white fa-fw fa-sm"></i>
+                    </div>
+                    @endif
+
                 </td>
                 <td class="d-none" id="endereco{{$usuario->id}}">{{$usuario->endereco}}</td>
             </tr>

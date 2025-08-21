@@ -26,16 +26,18 @@ Route::middleware([CheckIsLogged::class])->group(function(){
         Route::post('/salvar', [UsuarioController::class, 'salvar'])->name('usuario.salvar');
         Route::post('/deletar', [UsuarioController::class, 'deletar'])->name('usuario.deletar');
     });
-    Route::prefix('grupo')->group(function(){
-        Route::get('/', [GrupoController::class, 'index'])->name('grupo');
-        Route::get('/listar', [GrupoController::class, 'listar'])->name('grupo.listar');
-        Route::post('/salvar', [GrupoController::class, 'salvar'])->name('grupo.salvar');
-        Route::post('/deletar', [GrupoController::class, 'deletar'])->name('grupo.deletar');
-    });
-    Route::prefix('acesso')->group(function(){
-        Route::get('/', [AcessoController::class, 'index'])->name('acesso');
-        Route::get('/listar', [AcessoController::class, 'listar'])->name('acesso.listar');
-        Route::post('/salvar', [AcessoController::class, 'salvar'])->name('acesso.salvar');
-        Route::post('/deletar', [AcessoController::class, 'deletar'])->name('acesso.deletar');
+    Route::prefix('cadastro')->group(function(){
+        Route::prefix('grupo')->group(function(){
+            Route::get('/', [GrupoController::class, 'index'])->name('grupo');
+            Route::get('/listar', [GrupoController::class, 'listar'])->name('grupo.listar');
+            Route::post('/salvar', [GrupoController::class, 'salvar'])->name('grupo.salvar');
+            Route::post('/deletar', [GrupoController::class, 'deletar'])->name('grupo.deletar');
+        });
+        Route::prefix('acesso')->group(function(){
+            Route::get('/', [AcessoController::class, 'index'])->name('acesso');
+            Route::get('/listar', [AcessoController::class, 'listar'])->name('acesso.listar');
+            Route::post('/salvar', [AcessoController::class, 'salvar'])->name('acesso.salvar');
+            Route::post('/deletar', [AcessoController::class, 'deletar'])->name('acesso.deletar');
+        });
     });
 });

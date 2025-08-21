@@ -39,4 +39,5 @@ $titulo = 'Lista de Acessos';
 @endsection
 
 @section('js')
+<?=CDN_JS_CHOICES?>
 @endsection

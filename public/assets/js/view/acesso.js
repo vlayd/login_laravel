@@ -1,5 +1,6 @@
 // ========VARIÁVEIS BASE=============
 var modalSave =  new bootstrap.Modal(document.getElementById('saveModal'));
+const currentUrl = window.location.href;
 
 // ========INICIALIZAÇÃO=============
 $(document).ready(function () {
@@ -11,8 +12,6 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-
-
 $('body').on("click", '.btn_prepare_save', function () { prepereSalvar($(this).data('id')); });
 $('body').on("click", '.btn_prepare_delete', function () { prepereDeletar($(this).data('id')); });
 $('body').on("click", '.btn_delete', function () { deletar($(this).data('id')); });
@@ -21,13 +20,15 @@ $('#form_save').on("submit", function (e) { salvar(e, this); });
 function prepereSalvar(id) {
     if (id == '0') return resetInput();
     $('[name="nome"]').val($('#nome' + id).html());
+    $('[name="chave"]').val($('#chave' + id).html());
+    $('[name="grupo"]').val($('#id_grupo' + id).html()).change();
     $('[name="id"]').val(id);
 }
 
 function salvar(event, formdata){
     event.preventDefault();
     $.ajax({
-        url: urlAcesso + 'salvar',
+        url: currentUrl + '/salvar',
         method: 'POST',
         data: new FormData(formdata),
         contentType: false,
@@ -65,7 +66,7 @@ function prepereDeletar(id) {
 
 function deletar(id) {
     $.ajax({
-        url: urlAcesso + 'deletar',
+        url: currentUrl + '/deletar',
         method: 'POST',
         data: {id: id},
         success: function (result) {
@@ -80,7 +81,7 @@ function deletar(id) {
 
 function listar() {
     $.ajax({
-        url: urlAcesso + 'listar',
+        url: currentUrl + '/listar',
         method: 'GET',
         success: function (result) {
             $('#tabela').html(result);
@@ -90,6 +91,8 @@ function listar() {
 
 function resetInput() {
     $('[name="nome"]').val('');
+    $('[name="chave"]').val('');
+    $('[name="grupo"]').val('0').change();
     $('[name="id"]').val('');
     resetErros();
 }

@@ -29,7 +29,7 @@
                 @csrf
                 <label>E-mail</label>
                 <div class="mb-3">
-                    <input type="email" name="email" class="form-control" value="{{old('email')}}" required>
+                    <input type="email" name="email" class="form-control" value="vlaydisson@gmail.com" required>
                     {{-- show error --}}
                     @error('email')
                         <div class="text-danger text-xs">{{$message}}</div>
@@ -37,7 +37,7 @@
                 </div>
                 <label>Senha</label>
                 <div class="mb-3">
-                    <input type="password" name="senha" class="form-control" required>
+                    <input type="password" name="senha" value="123" class="form-control" required>
                     {{-- show error --}}
                     @error('senha')
                         <div class="text-danger text-xs">{{$message}}</div>

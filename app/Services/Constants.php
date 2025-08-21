@@ -24,6 +24,13 @@ define('SELECT_USUARIOS_NIVEIS', [
                                     'niveis.nome AS nivel',
                                     'niveis.id AS idNivel',
                                 ]);
+define('SELECT_ACESSOS_GRUPO', [
+                                    'acessos.id AS id',
+                                    'acessos.nome AS nome',
+                                    'acessos.chave',
+                                    'acessos.grupo as idGrupo',
+                                    'grupo_acessos.nome as grupo',
+                                ]);
 
 
 //_______________________CSS_____________________
@@ -73,9 +80,16 @@ define('CDN_JS_DATATABLES',
     <script src="'.CDN_JS_INIT.'datatables.js"></script>
     '
 );
+define('CDN_JS_CHOICES',
+    '
+    <script src="'.CDN_JS_PLUGIN.'choices.min.js"></script>
+    <script src="'.CDN_JS_INIT.'choices.js"></script>
+    '
+);
 define('CDN_JS_TOAST', '<script src="'.CDN_JS_PLUGIN.'jquery.toast.min.js"></script>');
 define('CDN_JS_SWEETALERT2', '<script src="'.CDN_JS_PLUGIN.'sweetalert2.min.js"></script>');
 
+//________________________________GRUPO DE PLUGINS__________________________
 define('CDN_JS_NOTIFIQUE',
     CDN_JS_TOAST.
     CDN_JS_SWEETALERT2

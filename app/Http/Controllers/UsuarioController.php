@@ -14,12 +14,16 @@ class UsuarioController extends Controller
             'breadcrumb' => $this->breadcrumb([
                 ['Usuários', route('usuario')], ['Lista']
             ]),
+            'acessos' => DB::table('acessos')->get(),
         ];
         return view('usuario.index', $dados);
     }
 
     public function listar()
     {
+        $dados = [
+            'usuarios' => $this->getTabela(),
+        ];
          return view('usuario.tabela', ['usuarios' => $this->getTabela()]);
     }
 

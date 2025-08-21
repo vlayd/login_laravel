@@ -17,6 +17,7 @@ $.ajaxSetup({
 $('body').on("click", '.btn_show', function () { ver($(this).data('id')); });
 $('body').on("click", '.btn_prepare_save', function () { prepereSalvar($(this).data('id')); });
 $('body').on("click", '.btn_prepare_delete', function () { prepereDeletar($(this).data('id')); });
+$('body').on("click", '.btn_prepare_permissao', function () { preperePermissao($(this).data('id')); });
 $('body').on("click", '.btn_delete', function () { deletar($(this).data('id')); });
 $('body').on("click", '.btn_block', function () { bloquear($(this).data('id'), $(this).data('ativo')); });
 $('#form_save').on("submit", function (e) { salvar(e, this); });
@@ -70,6 +71,10 @@ function salvar(event, formdata){
 function prepereDeletar(id) {
     $('#deletar_nome').html($('#nome' + id).html());
     $('.btn_delete').attr('data-id', id);
+}
+
+function preperePermissao(id) {
+    $('#nome_usuario_permissao').html($('#nome' + id).html());
 }
 
 function deletar(id) {

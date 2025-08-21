@@ -1,5 +1,6 @@
 // ========VARIÁVEIS BASE=============
 var modalSave =  new bootstrap.Modal(document.getElementById('saveModal'));
+const currentUrl = window.location.href;
 
 // ========INICIALIZAÇÃO=============
 $(document).ready(function () {
@@ -28,7 +29,7 @@ function prepereSalvar(id) {
 function salvar(event, formdata){
     event.preventDefault();
     $.ajax({
-        url: urlGrupo + 'salvar',
+        url: currentUrl + '/salvar',
         method: 'POST',
         data: new FormData(formdata),
         contentType: false,
@@ -66,7 +67,7 @@ function prepereDeletar(id) {
 
 function deletar(id) {
     $.ajax({
-        url: urlGrupo + 'deletar',
+        url: currentUrl + '/deletar',
         method: 'POST',
         data: {id: id},
         success: function (result) {
@@ -81,7 +82,7 @@ function deletar(id) {
 
 function listar() {
     $.ajax({
-        url: urlGrupo + 'listar',
+        url: currentUrl + '/listar',
         method: 'GET',
         success: function (result) {
             $('#tabela').html(result);

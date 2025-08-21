@@ -36,6 +36,7 @@ $titulo = 'Lista de Usuários';
 @include('usuario.modals.modal_save')
 @include('usuario.modals.modal_ver')
 @include('usuario.modals.modal_deletar')
+@include('usuario.modals.modal_permissao')
 @endsection
 
 @section('js')

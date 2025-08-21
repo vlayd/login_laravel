@@ -65,9 +65,9 @@ class GrupoController extends Controller
         try {
             return DB::table('grupo_acessos')
                     ->select(['grupo_acessos.id', 'grupo_acessos.nome'])
-                    ->selectRaw('COUNT(grupo_acessos.nome) AS qtdAcessos')
-                    ->join('acessos', 'grupo_acessos.id', '=', 'acessos.grupo')
-                    ->groupBy('grupo_acessos.nome', 'grupo_acessos.id')
+                    ->selectRaw('COUNT(acessos.grupo) AS qtdAcessos')
+                    ->join('acessos', 'grupo_acessos.id', '=', 'acessos.grupo', 'LEFT')
+                    ->groupBy('grupo_acessos.id', 'grupo_acessos.nome')
                     ->get();
         } catch (\Throwable $th) {
             return $th->getMessage();
