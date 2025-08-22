@@ -9,8 +9,8 @@
              </div>
              <div class="modal-body">
                  <div class="row">
-                    @foreach ($acessos as $acesso)
-                    @include('layouts.inputs.input_checkbox', ['label' => $acesso->nome, 'classe' => 'col-6'])
+                    @foreach ($grupos as $grupo)
+                    @include('layouts.inputs.input_checkbox', ['label' => $grupo->acesso, 'classe' => 'col-6'])
                     @endforeach
                  </div>
              </div>

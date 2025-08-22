@@ -14,7 +14,12 @@ class UsuarioController extends Controller
             'breadcrumb' => $this->breadcrumb([
                 ['Usuários', route('usuario')], ['Lista']
             ]),
-            'acessos' => DB::table('acessos')->get(),
+            'grupos' => DB::table('grupo_acessos')
+                            ->select(['grupo_acessos.nome as grupo', 'acessos.nome as acesso'])
+                            ->join('acessos', 'grupo_acessos.id', '=', 'acessos.grupo', 'right')
+                            ->orderBy('grupo_acessos.nome')
+                            ->get(),
+            'acessos' => DB::table('acessos')->orderBy('grupo')->get(),
         ];
         return view('usuario.index', $dados);
     }
