@@ -7,18 +7,33 @@
                      <i class="fa-solid fa-xmark text-white"></i>
                  </span>
              </div>
-             <div class="modal-body">
-                 <div class="row">
-                    @foreach ($grupos as $grupo)
-                    @include('layouts.inputs.input_checkbox', ['label' => $grupo->acesso, 'classe' => 'col-6'])
-                    @endforeach
+             <form action="{{route('usuario.salvarpermissoes')}}" method="post">
+                @csrf
+                 <div class="modal-body">
+                     <div class="row">
+                         @foreach ($grupos as $grupo)
+                         <div class="col-12 bg-gray-200 py-2 mx-0 text-center fw-bold mb-2">{{$grupo->nome??'Sem Grupo'}}</div>
+                         @foreach ($acessos as $acesso)
+                         @if ($grupo->id == $acesso->grupo)
+                         @include('layouts.inputs.input_checkbox', [
+                         'label' => $acesso->nome,
+                         'classe' => 'col-6',
+                         'campo' => 'permissao',
+                         'valor' => $acesso->id,
+                         'colchete' => '[]',
+                         ])
+                         @endif
+                         @endforeach
+                         <div class="col-12 mb-2"></div>
+                         @endforeach
+                     </div>
                  </div>
-             </div>
-             <div class="modal-footer">
-                     <button type="submit" form="form_save" class="btn bg-gradient-primary">Salvar</button>
+                 <div class="modal-footer">
+                     <button type="submit" class="btn bg-gradient-primary">Salvar</button>
                      <input type="hidden" name="id" value="">
                      <button type="button" class="btn btn-link ml-auto" data-bs-dismiss="modal">Fechar</button>
                  </div>
+             </form>
          </div>
      </div>
  </div>

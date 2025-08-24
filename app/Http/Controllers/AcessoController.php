@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class AcessoController extends Controller
 {
-    private $textItem = 'Acessos';
-
     public function index()
     {
         $dados = [
@@ -53,6 +51,17 @@ class AcessoController extends Controller
         }
     }
 
+    public function deletar(Request $request)
+    {
+        try {
+            if($request['id'] != ''){
+            DB::table('acessos')->delete($request['id']);
+            return 'success';
+            }
+        } catch (\Throwable $th) {
+            return 'erro ' . $th->getMessage();
+        }
+    }
 
     private function getTabelaAcesso()
     {

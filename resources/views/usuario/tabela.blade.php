@@ -8,6 +8,7 @@
                 <th>Nivel</th>
                 <th>Ações</th>
                 <th class="d-none"></th>
+                <th class="d-none"></th>
             </tr>
         </thead>
         <tbody>
@@ -62,6 +63,7 @@
 
                 </td>
                 <td class="d-none" id="endereco{{$usuario->id}}">{{$usuario->endereco}}</td>
+                <td class="d-none" id="permissoes{{$usuario->id}}">{{$usuario->permissoes}}</td>
             </tr>
             @endforeach
 

@@ -24,6 +24,18 @@ define('SELECT_USUARIOS_NIVEIS', [
                                     'niveis.nome AS nivel',
                                     'niveis.id AS idNivel',
                                 ]);
+define('SELECT_USUARIOS_NIVEIS_PERMISSOES', [
+                                    'usuarios.id AS id',
+                                    'usuarios.nome AS nome',
+                                    'usuarios.endereco',
+                                    'usuarios.ativo',
+                                    'usuarios.config',
+                                    'email', 'telefone', 'foto',
+                                    'niveis.nome AS nivel',
+                                    'niveis.id AS idNivel',
+                                    'usuarios_permissoes.permissoes AS permissoes',
+                                    'usuarios_permissoes.id_usuario',
+                                ]);
 define('SELECT_ACESSOS_GRUPO', [
                                     'acessos.id AS id',
                                     'acessos.nome AS nome',

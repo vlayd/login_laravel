@@ -75,6 +75,17 @@ function prepereDeletar(id) {
 
 function preperePermissao(id) {
     $('#nome_usuario_permissao').html($('#nome' + id).html());
+    $('[name="id"]').val(id);
+    const permissoesJson = $('#permissoes' + id).html();
+    $('.form-check-input').prop('checked', false);
+    if(permissoesJson != ''){
+        const permissoes = JSON.parse(permissoesJson);
+        //Desmarca todos o checkbox antes de fazer as verificações
+        $.each(permissoes, function(key, value){
+            $('#permissao' + value).prop('checked', true);
+        });
+    }
+
 }
 
 function deletar(id) {
