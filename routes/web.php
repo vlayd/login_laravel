@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AcessoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Middleware\CheckAcessoUsuario;
 use App\Http\Middleware\CheckIsLogged;
 use App\Http\Middleware\CheckIsNotLogged;
 use Illuminate\Support\Facades\Route;
@@ -19,14 +21,20 @@ Route::middleware([CheckIsNotLogged::class])->group(function(){
 //Se logado
 Route::middleware([CheckIsLogged::class])->group(function(){
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-    Route::prefix('usuario')->group(function(){
-        Route::get('/', [UsuarioController::class, 'index'])->name('usuario');
-        Route::get('/listar', [UsuarioController::class, 'listar'])->name('usuario.listar');
-        Route::post('/block', [UsuarioController::class, 'bloquear'])->name('usuario.bloquear');
-        Route::post('/salvar', [UsuarioController::class, 'salvar'])->name('usuario.salvar');
-        Route::post('/salvarpermissoes', [UsuarioController::class, 'salvarPermissoes'])->name('usuario.salvarpermissoes');
-        Route::post('/deletar', [UsuarioController::class, 'deletar'])->name('usuario.deletar');
+    Route::get('page404', [MainController::class, 'page404'])->name('page404');
+
+    Route::middleware([CheckAcessoUsuario::class])->group(function(){
+        Route::prefix('usuario')->group(function(){
+            Route::get('/', [UsuarioController::class, 'index'])->name('usuario');
+            Route::get('/listar', [UsuarioController::class, 'listar'])->name('usuario.listar');
+            Route::post('/block', [UsuarioController::class, 'bloquear'])->name('usuario.bloquear');
+            Route::post('/salvar', [UsuarioController::class, 'salvar'])->name('usuario.salvar');
+            Route::post('/salvarpermissoes', [UsuarioController::class, 'salvarPermissoes'])->name('usuario.salvarpermissoes');
+            Route::post('/deletar', [UsuarioController::class, 'deletar'])->name('usuario.deletar');
+        });
     });
+
+
     Route::prefix('cadastro')->group(function(){
         Route::prefix('grupo')->group(function(){
             Route::get('/', [GrupoController::class, 'index'])->name('grupo');

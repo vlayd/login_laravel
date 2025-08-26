@@ -23,6 +23,7 @@ class UsuarioController extends Controller
             'acessos' => DB::table('acessos')->orderBy('grupo')->get(),
         ];
         return view('usuario.index', $dados);
+
     }
 
     public function listar()
@@ -90,15 +91,21 @@ class UsuarioController extends Controller
         array_shift($permissoes);
         //Para remover o primeiro item que é id do usuário
         array_pop($permissoes);
-        DB::table('usuarios_permissoes')->updateOrInsert(
-            [
-                'id_usuario' => $request['id']
-            ],
-            [
-                'id_usuario' => $request['id'],
-                'permissoes' => json_encode($permissoes[0]), //[0] Elimina o erro de array de array
-            ]
-        );
+        // dd($permissoes);
+        if($permissoes == []){
+            DB::table('usuarios_permissoes')->where(['id_usuario' => $request['id']])->delete();
+        } else {
+            DB::table('usuarios_permissoes')->updateOrInsert(
+                [
+                    'id_usuario' => $request['id']
+                ],
+                [
+                    'id_usuario' => $request['id'],
+                    'permissoes' => $permissoes == [] ? '[]' : json_encode($permissoes[0]), //[0] Elimina o erro de array de array
+                ]
+            );
+        }
+
 
         return redirect()->back();
     }

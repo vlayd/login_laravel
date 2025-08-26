@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Services\Operations;
 use Illuminate\Support\Facades\DB;
 
-use function PHPUnit\Framework\isNull;
-
 abstract class Controller
 {
 
@@ -87,5 +85,22 @@ abstract class Controller
         ];
         if (!empty($id)) $where[] = ['id', '!=', $id];
         return DB::table($tabela)->where($where)->count();
+    }
+
+    public static function checkAcesso($chavePermissao)
+    {
+        if(session('user.nivel') != '2'){
+            $idAcesso = DB::table('acessos')
+                            ->where('chave', $chavePermissao)->first()->id;
+            if($idAcesso == null) return false;
+            $permissoes = DB::table('usuarios_permissoes')
+                            ->where('id_usuario', session('user.id'))
+                            ->first();
+            if($permissoes == null) return false;
+            $permissoes = json_decode($permissoes->permissoes);
+            return in_array($idAcesso, $permissoes);
+
+        }
+        return true;
     }
 }

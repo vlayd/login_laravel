@@ -14,4 +14,9 @@ class MainController extends Controller
 
         return view('home.index');
     }
+
+    public function page404()
+    {
+        return view('layouts.page_404');
+    }
 }
