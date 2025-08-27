@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckAcessoUsuario
+class CheckAcesso
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class CheckAcessoUsuario
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $chaveAcesso = $request->route()->uri();
-        if(!Controller::checkAcesso($chaveAcesso)){
+        $chaveAcesso = $request->route()->action['prefix'];
+        if(!Controller::checkAcesso(substr($chaveAcesso, 1))){
             // die(!Controller::checkAcesso('4'));
             return redirect()->route('page404');
         }

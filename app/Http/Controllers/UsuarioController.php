@@ -31,7 +31,7 @@ class UsuarioController extends Controller
         $dados = [
             'usuarios' => $this->getTabela(),
         ];
-         return view('usuario.tabela', ['usuarios' => $this->getTabela()]);
+        return view('usuario.tabela', ['usuarios' => $this->getTabela()]);
     }
 
     public function bloquear(Request $request)

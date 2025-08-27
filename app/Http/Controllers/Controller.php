@@ -11,6 +11,7 @@ abstract class Controller
     public function __construct()
     {
         define('USER', DB::table('usuarios')->where('id', session('user.id'))->first());
+        define('PERMISSOES', DB::table('usuarios_permissoes')->where('id_usuario', session('user.id'))->first());
     }
 
     protected function breadcrumb(array $list)
@@ -90,15 +91,16 @@ abstract class Controller
     public static function checkAcesso($chavePermissao)
     {
         if(session('user.nivel') != '2'){
-            $idAcesso = DB::table('acessos')
-                            ->where('chave', $chavePermissao)->first()->id;
+            $idAcesso = DB::table('acessos')->where('chave', $chavePermissao)->first();
             if($idAcesso == null) return false;
             $permissoes = DB::table('usuarios_permissoes')
+                            ->where('permissoes', 'like', '%"'.$idAcesso->id.'"%')
                             ->where('id_usuario', session('user.id'))
                             ->first();
             if($permissoes == null) return false;
-            $permissoes = json_decode($permissoes->permissoes);
-            return in_array($idAcesso, $permissoes);
+            return true;
+            // $permissoes = json_decode($permissoes->permissoes);
+            // return in_array($idAcesso, $permissoes);
 
         }
         return true;

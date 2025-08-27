@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UsuarioController;
-use App\Http\Middleware\CheckAcessoUsuario;
+use App\Http\Middleware\CheckAcesso;
 use App\Http\Middleware\CheckIsLogged;
 use App\Http\Middleware\CheckIsNotLogged;
 use Illuminate\Support\Facades\Route;
@@ -14,17 +14,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MainController::class, 'index'])->name('index');
 
 //Se não logado
-Route::middleware([CheckIsNotLogged::class])->group(function(){
+Route::middleware([CheckIsNotLogged::class])->group(function () {
     Route::post('login', [AuthController::class, 'login'])->name('login');
 });
 
 //Se logado
-Route::middleware([CheckIsLogged::class])->group(function(){
+Route::middleware([CheckIsLogged::class])->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('page404', [MainController::class, 'page404'])->name('page404');
 
-    Route::middleware([CheckAcessoUsuario::class])->group(function(){
-        Route::prefix('usuario')->group(function(){
+    Route::middleware([CheckAcesso::class])->group(function () {
+        Route::prefix('usuario')->group(function () {
             Route::get('/', [UsuarioController::class, 'index'])->name('usuario');
             Route::get('/listar', [UsuarioController::class, 'listar'])->name('usuario.listar');
             Route::post('/block', [UsuarioController::class, 'bloquear'])->name('usuario.bloquear');
@@ -32,17 +32,13 @@ Route::middleware([CheckIsLogged::class])->group(function(){
             Route::post('/salvarpermissoes', [UsuarioController::class, 'salvarPermissoes'])->name('usuario.salvarpermissoes');
             Route::post('/deletar', [UsuarioController::class, 'deletar'])->name('usuario.deletar');
         });
-    });
-
-
-    Route::prefix('cadastro')->group(function(){
-        Route::prefix('grupo')->group(function(){
+        Route::prefix('grupo')->group(function () {
             Route::get('/', [GrupoController::class, 'index'])->name('grupo');
             Route::get('/listar', [GrupoController::class, 'listar'])->name('grupo.listar');
             Route::post('/salvar', [GrupoController::class, 'salvar'])->name('grupo.salvar');
             Route::post('/deletar', [GrupoController::class, 'deletar'])->name('grupo.deletar');
         });
-        Route::prefix('acesso')->group(function(){
+        Route::prefix('acesso')->group(function () {
             Route::get('/', [AcessoController::class, 'index'])->name('acesso');
             Route::get('/listar', [AcessoController::class, 'listar'])->name('acesso.listar');
             Route::post('/salvar', [AcessoController::class, 'salvar'])->name('acesso.salvar');
