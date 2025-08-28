@@ -27,7 +27,7 @@
 <body class="g-sidenav-show bg-gray-100">
   <div class="d-none" id="base_url">{{asset('')}}</div>
 
-  @include('layouts.sidebar_main')
+  @include('layouts.menus_bar.sidebar')
 
   <main class="main-content position-relative border-radius-lg ">
     <!-- Navbar -->
