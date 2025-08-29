@@ -6,13 +6,30 @@
         }
     }
 
+    $page = $page??'';
+    $item = $item??'';
     $sideBar = [
         [
             'titulo' => 'DASHBOARD',
             'menu' => 'Home',
-            'linkMenu' => '',
-            'activeMenu' => $activeHome??false,
-        ]
+            'route' => 'index',
+            'activeMenu' => $page=='home'?'active':'',
+        ],
+        [
+            'titulo' => 'PESSOAS',
+            'menu' => 'Usuários',
+            'activeMenu' => $page=='usuario'?'active':'',
+            'showMenu' => $page=='usuario'?'show':'',
+            'collapse' => 'usuariosColapse',
+            'collapses' => [
+                [
+                    'item' => 'Lista',
+                    'miniItem' => 'Lis',
+                    'activeItem' => $item=='listaUsuarios'?'active':'',
+                    'route' => 'usuario.listar',
+                ]
+            ],
+        ],
     ]
 ?>
 <!-- INÍCIO Menu lateral -->
@@ -25,20 +42,43 @@
             <span class="font-weight-bold mt-n2"><?= NAME_APP ?></span>
         </a>
     </div>
-    <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse w-auto h-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             @foreach ($sideBar as $menuBar)
+
+            @php
+            $collapse = '';
+
+            @endphp
+
+            @if (isset($menuBar['collapse']))
+            @endif
+
+            @if (isset($menuBar['titulo']))
+            <hr class="horizontal dark mt-0">
             <li class="nav-item">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">{{$menuBar['titulo']}}</h6>
             </li>
+            @endif
             <li class="nav-item">
-                <a href="{{asset($menuBar['linkMenu'])}}" class="nav-link {{$menuBar['activeMenu']==true?'active':''}}">
+                <a href="{{route($menuBar['route'])}}" class="nav-link {{$menuBar['activeMenu']}}">
                     <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                         <i class="fas fa-home text-primary text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">{{$menuBar['menu']}}</span>
                 </a>
+                @if (isset($menuBar['collapse']))
+                <div class="collapse {{$menuBar['showMenu']}}" id="{{$menuBar['showMenu']}}">
+                    <ul class="nav ms-4">
+                        <li class="nav-item ">
+                            <a class="nav-link {{$activeListaUsuarios??''}}" href="{{route($menuBar['collapses']['route'])}}">
+                                <span class="sidenav-mini-icon"> {{$menuBar['miniItem']}} </span>
+                                <span class="sidenav-normal"> {{$menuBar['item']}} </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                @endif
             </li>
             @endforeach
 

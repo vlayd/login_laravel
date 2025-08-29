@@ -1,5 +1,5 @@
 @php
-    $activeHome = 'active'
+    $page = 'home';
 @endphp
 @extends('layouts.main_layout')
 
