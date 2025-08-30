@@ -1,5 +1,5 @@
 @php
-    $page = 'home';
+    $page = ['home'];
 @endphp
 @extends('layouts.main_layout')
 

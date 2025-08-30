@@ -105,11 +105,10 @@
   <?=CDN_JS_TOAST?>
   <?=CDN_JS_SWEETALERT2?>
   <?=CDN_JS_MAIN?>
-  @php
-      $scriptPage = $page??'home';
-  @endphp
   <script src="{{asset('assets/js/view/pages.js')}}" type="text/javascript"></script>
-  <script src="{{asset('assets/js/view/'.$scriptPage.'.js')}}" type="text/javascript"></script>
+  @if (isset($page[0]))
+  <script src="{{asset('assets/js/view/'.$page[0].'.js')}}" type="text/javascript"></script>
+  @endif
   @yield('js2')
 </body>
 

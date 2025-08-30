@@ -1,8 +1,5 @@
 @php
-$activeListaUsuarios = 'active';
-$activeUsuarios = 'active';
-$showUsuarios = 'show';
-$page = 'usuario';
+$page = ['usuario', 'listaUsuarios'];
 $titulo = 'Lista de Usuários';
 @endphp
 @extends('layouts.main_layout')
