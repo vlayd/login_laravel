@@ -1,9 +1,7 @@
 @php
-$activeListaAcessos = 'active';
-$activeCadastros = 'active';
-$showCadastro = 'show';
-$page = 'acesso';
+$page = ['cadastro', 'listaAcessos'];
 $titulo = 'Lista de Acessos';
+$js = 'acesso';
 @endphp
 @extends('layouts.main_layout')
 @section('breadcrumb')

@@ -10,8 +10,18 @@ abstract class Controller
 
     public function __construct()
     {
+        // $permissoesDb = DB::table('usuarios_permissoes')->where('id_usuario', session('user.id'))->first();
+        // $permissoes = null;
+        // if(!empty($permissoesDb)){
+        //     $permissoesArray = json_decode($permissoesDb->permissoes);
+        //     foreach($permissoesArray as $permissao){
+        //         $permissoes[]
+        //     }
+        // }
         define('USER', DB::table('usuarios')->where('id', session('user.id'))->first());
         define('PERMISSOES', DB::table('usuarios_permissoes')->where('id_usuario', session('user.id'))->first());
+        define('ACESSOS', DB::table('acessos')->get());
+        define('COUNT_PERMISSOES', DB::table('usuarios_permissoes')->where('id_usuario', session('user.id'))->count());
     }
 
     protected function breadcrumb(array $list)

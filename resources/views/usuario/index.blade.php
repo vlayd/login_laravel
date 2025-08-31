@@ -1,5 +1,6 @@
 @php
 $page = ['usuario', 'listaUsuarios'];
+$js = 'usuario';
 $titulo = 'Lista de Usuários';
 @endphp
 @extends('layouts.main_layout')

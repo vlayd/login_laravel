@@ -106,8 +106,8 @@
   <?=CDN_JS_SWEETALERT2?>
   <?=CDN_JS_MAIN?>
   <script src="{{asset('assets/js/view/pages.js')}}" type="text/javascript"></script>
-  @if (isset($page[0]))
-  <script src="{{asset('assets/js/view/'.$page[0].'.js')}}" type="text/javascript"></script>
+  @if (isset($js))
+  <script src="{{asset('assets/js/view/'.$js.'.js')}}" type="text/javascript"></script>
   @endif
   @yield('js2')
 </body>

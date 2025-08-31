@@ -1,9 +1,7 @@
 @php
-$activeListaGrupos = 'active';
-$activeCadastros = 'active';
-$showCadastro = 'show';
-$page = 'grupo';
+$page = ['cadastro', 'listaGrupos'];
 $titulo = 'Lista de Grupo';
+$js = 'grupo';
 @endphp
 @extends('layouts.main_layout')
 @section('breadcrumb')
