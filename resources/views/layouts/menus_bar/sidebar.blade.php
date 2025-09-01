@@ -57,11 +57,16 @@ if (session('user.nivel') != 2) {
         unset($menusBar[0]);
         unset($menusBar[1]);
         unset($menusBar[2]);
-    } else {
-        if (!in_array('1', json_decode(PERMISSOES->permissoes))) unset($menusBar[0]);
-        if (!in_array('4', json_decode(PERMISSOES->permissoes))) unset($menusBar[1]);
-        if (!in_array('8', json_decode(PERMISSOES->permissoes))) unset($menusBar[2]['collapses'][0]);
-        if (!in_array('5', json_decode(PERMISSOES->permissoes))) unset($menusBar[2]['collapses'][1]);
+    } else {    
+        $permissoesHome = in_array('index', json_decode(PERMISSOES->permissoes));
+        $permissoesUsuario = in_array('usuario', json_decode(PERMISSOES->permissoes));
+        $permissoesAcesso = in_array('acesso', json_decode(PERMISSOES->permissoes));
+        $permissoesGrupo = in_array('grupo', json_decode(PERMISSOES->permissoes));
+        if (!$permissoesHome) unset($menusBar[0]);
+        if (!$permissoesUsuario) unset($menusBar[1]);
+        if (!$permissoesGrupo && !$permissoesAcesso) unset($menusBar[2]);
+        elseif (!$permissoesGrupo) unset($menusBar[2]['collapses'][0]);
+        elseif (!$permissoesAcesso) unset($menusBar[2]['collapses'][1]);
     }
 }
 

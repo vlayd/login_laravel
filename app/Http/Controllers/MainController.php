@@ -15,17 +15,12 @@ class MainController extends Controller
         if(session('user.nivel') != 2){
             if(COUNT_PERMISSOES == 0) return redirect()->route('page404');
             else {
-                //Pega somente a primeira permissão (id)
+                //Pega somente a primeira permissão (route)
                 $permissao1 = json_decode(PERMISSOES->permissoes)[0];
-                if($permissao1 != 1){
-                    //Pega o chave dessa acesso pela permissao
-                    $permissaoHome = DB::table('acessos')->select('chave')->where('id', $permissao1)->first()->chave;
-                    // die($permissaoHome);
-                    return redirect()->route($permissaoHome);
-                }
+                //Evita o bug do redirect
+                if($permissao1 != 'index') return redirect()->route($permissao1);
             }
         }
-
 
         return view('home.index');
     }

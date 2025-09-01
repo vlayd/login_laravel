@@ -19,7 +19,7 @@
                          'label' => $acesso->nome,
                          'classe' => 'col-6',
                          'campo' => 'permissao',
-                         'valor' => $acesso->id,
+                         'valor' => $acesso->chave,
                          'colchete' => '[]',
                          ])
                          @endif

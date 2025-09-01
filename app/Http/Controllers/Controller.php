@@ -20,7 +20,7 @@ abstract class Controller
         // }
         define('USER', DB::table('usuarios')->where('id', session('user.id'))->first());
         define('PERMISSOES', DB::table('usuarios_permissoes')->where('id_usuario', session('user.id'))->first());
-        define('ACESSOS', DB::table('acessos')->get());
+        define('ACESSOS', DB::table('acessos')->select(['id', 'chave'])->get());
         define('COUNT_PERMISSOES', DB::table('usuarios_permissoes')->where('id_usuario', session('user.id'))->count());
     }
 
@@ -101,10 +101,8 @@ abstract class Controller
     public static function checkAcesso($chavePermissao)
     {
         if(session('user.nivel') != '2'){
-            $idAcesso = DB::table('acessos')->where('chave', $chavePermissao)->first();
-            if($idAcesso == null) return false;
             $permissoes = DB::table('usuarios_permissoes')
-                            ->where('permissoes', 'like', '%"'.$idAcesso->id.'"%')
+                            ->where('permissoes', 'like', '%"'.$chavePermissao.'"%')
                             ->where('id_usuario', session('user.id'))
                             ->first();
             if($permissoes == null) return false;

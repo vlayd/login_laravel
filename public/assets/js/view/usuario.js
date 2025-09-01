@@ -4,7 +4,6 @@ var modalSave =  new bootstrap.Modal(document.getElementById('saveModal'));
 // ========INICIALIZAÇÃO=============
 $(document).ready(function () {
     listar();
-
 });
 
 $.ajaxSetup({
