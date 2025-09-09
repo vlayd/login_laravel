@@ -12,11 +12,12 @@ class MainController extends Controller
         if(!session('user')){
             return view('login.index');
         }
-        if(session('user.nivel') != 2){
-            if(COUNT_PERMISSOES == 0) return redirect()->route('page404');
+        //Usa esse if, pois o middleware CheckAcesso não pega a home
+        if(session('user.nivel') != 1){
+            if(PERMISSOES->acessos == null) return redirect()->route('page404');
             else {
                 //Pega somente a primeira permissão (route)
-                $permissao1 = json_decode(PERMISSOES->permissoes)[0];
+                $permissao1 = json_decode(PERMISSOES->acessos)[0];
                 //Evita o bug do redirect
                 if($permissao1 != 'index') return redirect()->route($permissao1);
             }

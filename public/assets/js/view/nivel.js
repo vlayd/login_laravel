@@ -1,5 +1,6 @@
 // ========VARIÁVEIS BASE=============
 var modalSave =  new bootstrap.Modal(document.getElementById('saveModal'));
+const currentUrl = window.location.href;
 
 // ========INICIALIZAÇÃO=============
 $(document).ready(function () {
@@ -12,38 +13,23 @@ $.ajaxSetup({
     }
 });
 
-
-$('body').on("click", '.btn_show', function () { ver($(this).data('id')); });
 $('body').on("click", '.btn_prepare_save', function () { prepereSalvar($(this).data('id')); });
 $('body').on("click", '.btn_prepare_delete', function () { prepereDeletar($(this).data('id')); });
+if(document.getElementById('btn_delete_alert')) $('body').on("click", '.btn_delete_alert', function () { sweetAlert('error', 'Existem usuários ativos nesse nível', true); });
 $('body').on("click", '.btn_delete', function () { deletar($(this).data('id')); });
-$('body').on("click", '.btn_block', function () { bloquear($(this).data('id'), $(this).data('ativo')); });
+$('body').on("click", '.btn_prepare_permissao', function () { preperePermissao($(this).data('id')); });
 $('#form_save').on("submit", function (e) { salvar(e, this); });
 
-function ver(id) {
-    $('#nome_ver_modal').html($('#nome' + id).html());
-    $('#email_ver_modal').html($('#email' + id).html());
-    $('#telefone_ver_modal').html($('#telefone' + id).html());
-    $('#endereco_ver_modal').html($('#endereco' + id).html());
-    $('#foto_ver_modal').attr('src', $('#foto' + id).attr('src'));
-}
-
 function prepereSalvar(id) {
-    console.log($('#nivel' + id).html());
-
     if (id == '0') return resetInput();
     $('[name="nome"]').val($('#nome' + id).html());
-    $('[name="email"]').val($('#email' + id).html());
-    $('[name="telefone"]').val($('#telefone' + id).html());
-    $('[name="endereco"]').val($('#endereco' + id).html());
-    $('[name="nivel"]').val($('#nivel' + id).html()).change();
     $('[name="id"]').val(id);
 }
 
 function salvar(event, formdata){
     event.preventDefault();
     $.ajax({
-        url: urlUsuario + 'salvar',
+        url: currentUrl + '/salvar',
         method: 'POST',
         data: new FormData(formdata),
         contentType: false,
@@ -51,10 +37,12 @@ function salvar(event, formdata){
         processData: false,
         success: function (result) {
             resetErros();
-            if(result == 'success' || result == 'erro'){
+            if(result == 'success'){
                 toast('success', 'Salvo com sucesso!');
                 modalSave.hide();
                 listar();
+            } else if(result == 'erro'){
+                toast('erro', 'Erro ao salvar!');
             } else {
                 var erros = JSON.parse(result);
                 $.each(erros, function(key, value){
@@ -64,24 +52,42 @@ function salvar(event, formdata){
             }
         },
         error: function (result) {
-            toast('error', 'Erro ao enviar mensagem!');
+            toast('error', 'Erro ao salvar!');
         }
     });
 }
 
+function preperePermissao(id) {
+
+    $('#nome_usuario_permissao').html($('#nome' + id).html());
+    $('[name="id"]').val(id);
+    const permissoesJson = $('#permissoes' + id).html();
+    $('.form-check-input').prop('checked', false);
+    if(permissoesJson != null){
+        const permissoes = JSON.parse(permissoesJson);
+        //Desmarca todos o checkbox antes de fazer as verificações
+        $.each(permissoes, function(key, value){
+            $('#permissao' + value).prop('checked', true);
+        });
+    }
+}
+
 function prepereDeletar(id) {
     $('#deletar_nome').html($('#nome' + id).html());
+    console.log($('#deletar_nome').html());
+
     $('.btn_delete').attr('data-id', id);
+    console.log(id);
 }
 
 function deletar(id) {
     $.ajax({
-        url: urlUsuario + 'deletar',
+        url: currentUrl + '/deletar',
         method: 'POST',
         data: {id: id},
         success: function (result) {
             if(result == 'success') listar();
-            else toast('error', 'Erro ao deletar usuário!');
+            else toast('error', 'Erro ao deletar grupo!');
         },
         error: function (result) {
             toast('error', 'Erro desconhecido!');
@@ -91,7 +97,7 @@ function deletar(id) {
 
 function listar() {
     $.ajax({
-        url: urlUsuario + 'listar',
+        url: currentUrl + '/listar',
         method: 'GET',
         success: function (result) {
             $('#tabela').html(result);
@@ -99,29 +105,14 @@ function listar() {
     });
 }
 
-function bloquear(id, ativo) {
-    $.ajax({
-        url: urlUsuario + 'block',
-        method: 'POST',
-        data: { id: id, ativo: ativo },
-        success: function (result) {
-            if (result == 'success') listar();
-        }
-    });
-}
-
 function resetInput() {
     $('[name="nome"]').val('');
-    $('[name="email"]').val('');
-    $('[name="telefone"]').val('');
-    $('[name="endereco"]').val('');
     $('[name="id"]').val('');
     resetErros();
 }
 
 function resetErros(){
-    $.each(['email', 'telefone'], function(key, value){
-        $('#'+value+'_erro').html('');
-        $('[name="'+value+'"]').removeClass('is-invalid');
-    });
+    $('.nome_erro').html('');
+    $('[name="nome"]').removeClass('is-invalid');
 }
+

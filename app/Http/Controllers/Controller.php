@@ -19,9 +19,9 @@ abstract class Controller
         //     }
         // }
         define('USER', DB::table('usuarios')->where('id', session('user.id'))->first());
-        define('PERMISSOES', DB::table('usuarios_permissoes')->where('id_usuario', session('user.id'))->first());
+        define('PERMISSOES', DB::table('niveis')->where('id', session('user.nivel'))->first());
         define('ACESSOS', DB::table('acessos')->select(['id', 'chave'])->get());
-        define('COUNT_PERMISSOES', DB::table('usuarios_permissoes')->where('id_usuario', session('user.id'))->count());
+        // define('COUNT_PERMISSOES', DB::table('niveis')->where('id', session('user.nivel'))->count());
     }
 
     protected function breadcrumb(array $list)
@@ -100,10 +100,10 @@ abstract class Controller
 
     public static function checkAcesso($chavePermissao)
     {
-        if(session('user.nivel') != '2'){
-            $permissoes = DB::table('usuarios_permissoes')
-                            ->where('permissoes', 'like', '%"'.$chavePermissao.'"%')
-                            ->where('id_usuario', session('user.id'))
+        if(session('user.nivel') != '1'){
+            $permissoes = DB::table('niveis')
+                            ->where('acessos', 'like', '%"'.$chavePermissao.'"%')
+                            ->where('id', session('user.nivel'))
                             ->first();
             if($permissoes == null) return false;
             return true;

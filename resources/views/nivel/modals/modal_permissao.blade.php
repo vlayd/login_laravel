@@ -7,7 +7,7 @@
                      <i class="fa-solid fa-xmark text-white"></i>
                  </span>
              </div>
-             <form action="{{route('usuario.salvarpermissoes')}}" method="post">
+             <form action="{{route('nivel.salvarpermissoes')}}" method="post">
                 @csrf
                  <div class="modal-body">
                      <div class="row">
@@ -17,7 +17,7 @@
                          @if ($grupo->id == $acesso->grupo)
                          @include('layouts.inputs.input_checkbox', [
                          'label' => $acesso->nome,
-                         'classe' => 'col-6',
+                         'classe' => 'col-4',
                          'campo' => 'permissao',
                          'valor' => $acesso->chave,
                          'colchete' => '[]',

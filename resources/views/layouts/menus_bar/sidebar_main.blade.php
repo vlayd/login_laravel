@@ -1,6 +1,6 @@
 <?php
     $acessoUsuario = true;
-    if(session('user.nivel') != 2){
+    if(session('user.nivel') != 1){
         if(PERMISSOES == null || !str_contains('"4"', PERMISSOES->permissoes)) {
             $acessoUsuario = false;
         }

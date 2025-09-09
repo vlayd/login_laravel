@@ -60,7 +60,7 @@ class GrupoController extends Controller
         }
     }
 
-    private function getTabela($tabela = 'grupo_acessos')
+    private function getTabela()
     {
         try {
             return DB::table('grupo_acessos')

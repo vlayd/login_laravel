@@ -37,7 +37,7 @@
                 </td>
                 <td class="text-sm" id="telefone{{$usuario->id}}">{{$usuario->telefone}}</td>
                 <td class="text-sm" id="email{{$usuario->id}}">{{$usuario->email}}</td>
-                <td class="text-sm" id="nivel{{$usuario->id}}">{{$usuario->nivel}}</td>
+                <td class="text-sm">{{$usuario->nivel}}</td>
                 <td class="text-sm pb-0">
                     <a data-bs-toggle="modal" data-bs-target="#verModal" class="me-1 btn btn-primary py-1 px-2 btn_show" data-id="{{$usuario->id}}" title="Ver usuário">
                         <i class="fas fa-eye text-white fa-sm"></i>
@@ -51,7 +51,8 @@
                     <a class="me-1 btn btn-{{$corAtivo}} py-1 px-2 btn_block" title="Bloquear usuário" data-id="{{$usuario->id}}" data-ativo="{{$ativo}}">
                         <i class="fas fa-user{{$iconeAtivo}} text-white fa-fw fa-sm"></i>
                     </a>
-                    @if ($usuario->idNivel != 2)
+                    <div class="d-none" id="nivel{{$usuario->id}}">{{$usuario->idNivel}}</div>
+                    @if ($usuario->idNivel != 1)
                     <a data-bs-toggle="modal" data-bs-target="#permissaoModal"  class="me-1 btn btn-info py-1 px-2 btn_prepare_permissao" title="Permissões do usuário" data-id="{{$usuario->id}}">
                         <i class="fas fa-user-lock text-white fa-fw fa-sm"></i>
                     </a>
@@ -60,10 +61,8 @@
                         <i class="fas fa-user-lock text-white fa-fw fa-sm"></i>
                     </div>
                     @endif
-
                 </td>
                 <td class="d-none" id="endereco{{$usuario->id}}">{{$usuario->endereco}}</td>
-                <td class="d-none" id="permissoes{{$usuario->id}}">{{$usuario->permissoes}}</td>
             </tr>
             @endforeach
 

@@ -33,8 +33,6 @@ define('SELECT_USUARIOS_NIVEIS_PERMISSOES', [
                                     'email', 'telefone', 'foto',
                                     'niveis.nome AS nivel',
                                     'niveis.id AS idNivel',
-                                    'usuarios_permissoes.permissoes AS permissoes',
-                                    'usuarios_permissoes.id_usuario',
                                 ]);
 define('SELECT_ACESSOS_GRUPO', [
                                     'acessos.id AS id',
@@ -105,4 +103,14 @@ define('CDN_JS_SWEETALERT2', '<script src="'.CDN_JS_PLUGIN.'sweetalert2.min.js">
 define('CDN_JS_NOTIFIQUE',
     CDN_JS_TOAST.
     CDN_JS_SWEETALERT2
+);
+
+//________________________________INFORMAÇÕES DE PÁGINAS__________________________
+define('PAGE',
+    [
+        'home' =>
+        [
+            ''
+        ]
+    ]
 );

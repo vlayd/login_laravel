@@ -44,29 +44,37 @@ $menusBar = [
                 'route' => 'grupo',
             ],
             [
-                'item' => 'Acesso',
+                'item' => 'Acessos',
                 'miniItem' => 'Ace',
                 'activeMenuItem' => $page2 == 'listaAcessos' ? 'active' : '',
                 'route' => 'acesso',
             ],
+            [
+                'item' => 'Niveis',
+                'miniItem' => 'Niv',
+                'activeMenuItem' => $page2 == 'listaNiveis' ? 'active' : '',
+                'route' => 'nivel',
+            ],
         ],
     ],
 ];
-if (session('user.nivel') != 2) {
+if (session('user.nivel') != 1) {
     if (PERMISSOES == null) {
         unset($menusBar[0]);
         unset($menusBar[1]);
         unset($menusBar[2]);
-    } else {    
-        $permissoesHome = in_array('index', json_decode(PERMISSOES->permissoes));
-        $permissoesUsuario = in_array('usuario', json_decode(PERMISSOES->permissoes));
-        $permissoesAcesso = in_array('acesso', json_decode(PERMISSOES->permissoes));
-        $permissoesGrupo = in_array('grupo', json_decode(PERMISSOES->permissoes));
+    } else {
+        $permissoesHome = in_array('index', json_decode(PERMISSOES->acessos));
+        $permissoesUsuario = in_array('usuario', json_decode(PERMISSOES->acessos));
+        $permissoesAcesso = in_array('acesso', json_decode(PERMISSOES->acessos));
+        $permissoesGrupo = in_array('grupo', json_decode(PERMISSOES->acessos));
+        $permissoesNivel = in_array('nivel', json_decode(PERMISSOES->acessos));
         if (!$permissoesHome) unset($menusBar[0]);
         if (!$permissoesUsuario) unset($menusBar[1]);
         if (!$permissoesGrupo && !$permissoesAcesso) unset($menusBar[2]);
-        elseif (!$permissoesGrupo) unset($menusBar[2]['collapses'][0]);
-        elseif (!$permissoesAcesso) unset($menusBar[2]['collapses'][1]);
+        if (!$permissoesGrupo) unset($menusBar[2]['collapses'][0]);
+        if (!$permissoesAcesso) unset($menusBar[2]['collapses'][1]);
+        if (!$permissoesNivel) unset($menusBar[2]['collapses'][2]);
     }
 }
 

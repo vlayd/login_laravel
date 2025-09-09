@@ -14,13 +14,7 @@ class UsuarioController extends Controller
             'breadcrumb' => $this->breadcrumb([
                 ['Usuários', route('usuario')], ['Lista']
             ]),
-            'grupos' => DB::table('acessos')
-                            ->select(['grupo_acessos.nome as nome', 'grupo_acessos.id as id'])
-                            ->join('grupo_acessos', 'acessos.grupo', '=', 'grupo_acessos.id', 'left')
-                            ->groupBy('acessos.grupo')
-                            ->orderBy('acessos.grupo')
-                            ->get(),
-            'acessos' => DB::table('acessos')->orderBy('grupo')->get(),
+            'niveis' => DB::table('niveis')->get(),
         ];
         return view('usuario.index', $dados);
 
@@ -30,8 +24,9 @@ class UsuarioController extends Controller
     {
         $dados = [
             'usuarios' => $this->getTabela(),
+            'niveis' => DB::table('niveis')->get(),
         ];
-        return view('usuario.tabela', ['usuarios' => $this->getTabela()]);
+        return view('usuario.tabela', $dados);
     }
 
     public function bloquear(Request $request)
@@ -60,6 +55,7 @@ class UsuarioController extends Controller
             'email' => $request['email'],
             'telefone' => $request['telefone'],
             'endereco' => $request['endereco'],
+            'nivel' => $request['nivel'],
         ];
 
         try {
@@ -83,33 +79,6 @@ class UsuarioController extends Controller
         }
     }
 
-    public function salvarPermissoes(Request $request)
-    {
-        //Extrai só os valores do array, deixando a chave de fora
-        $permissoes = array_values($request->post());
-        //Para remover o primeiro item que é csrf token
-        array_shift($permissoes);
-        //Para remover o primeiro item que é id do usuário
-        array_pop($permissoes);
-        // dd($permissoes);
-        if($permissoes == []){
-            DB::table('usuarios_permissoes')->where(['id_usuario' => $request['id']])->delete();
-        } else {
-            DB::table('usuarios_permissoes')->updateOrInsert(
-                [
-                    'id_usuario' => $request['id']
-                ],
-                [
-                    'id_usuario' => $request['id'],
-                    'permissoes' => $permissoes == [] ? '[]' : json_encode($permissoes[0]), //[0] Elimina o erro de array de array
-                ]
-            );
-        }
-
-
-        return redirect()->back();
-    }
-
     public function deletar(Request $request)
     {
         try {
@@ -127,7 +96,6 @@ class UsuarioController extends Controller
         return DB::table('usuarios')
                         ->select(SELECT_USUARIOS_NIVEIS_PERMISSOES)
                         ->join('niveis', 'usuarios.nivel', '=', 'niveis.id')
-                        ->join('usuarios_permissoes', 'usuarios.id', '=', 'usuarios_permissoes.id_usuario', 'left')
                         ->where('usuarios.deletado', 0)
                         ->whereNot('usuarios.id', session('user.id')) //Não consta o usuário logado
                         ->get();

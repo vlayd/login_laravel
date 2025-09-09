@@ -2,7 +2,7 @@
      <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
              <div class="modal-header bg-gradient-primary">
-                 <h5 class="modal-title text-white" id="saveModalTitulo">Salvar Usuário</h5>
+                 <h5 class="modal-title text-white" id="saveModalTitulo">Salvar Nível</h5>
                  <span role="button" data-bs-dismiss="modal" aria-label="Close">
                      <i class="fa-solid fa-xmark text-white"></i>
                  </span>
@@ -10,11 +10,13 @@
              <form id="form_save">
                  <div class="modal-body">
                      <div class="row">
-                         @include('layouts.inputs.input_text', ['label'=> 'Nome', 'classe' => 'col-6', 'campo' => 'nome'])
-                         @include('layouts.select.select_input', ['campo' => 'nivel', 'classe' => 'col-6', 'items' => $niveis, 'label' => 'Nível'])
-                         @include('layouts.inputs.input_text', ['label'=> 'E-mail', 'campo' => 'email', 'classe' => 'col-6'])
-                         @include('layouts.inputs.input_text', ['label'=> 'Telefone', 'campo' => 'telefone', 'classe' => 'col-6'])
-                         @include('layouts.inputs.input_text', ['label'=> 'Endereço', 'campo' => 'endereco'])
+                         <div class="col-12 mb-2">
+                            <div class="form-group">
+                                <label for="nome_save_modal">Nome</label>
+                                <input name="nome" id="nome_save_modal" type="text" class="form-control">
+                                <div class="text-danger text-xs nome_erro"></div>
+                            </div>
+                         </div>
                      </div>
                  </div>
                  <div class="modal-footer">
